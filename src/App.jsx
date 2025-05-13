@@ -5,6 +5,7 @@ import TransactionForm from './components/TransactionForm';
 import TransactionList from './components/TransactionList';
 import Dashboard from './components/Dashboard';
 import BudgetForm from './components/BudgetForm';
+import FinancialTips from './components/FinancialTips';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <div className="lg:col-span-1 space-y-6">
               <TransactionForm />
               <BudgetForm />
+              <FinancialTips />
             </div>
             
             <div className="lg:col-span-2 space-y-6">
