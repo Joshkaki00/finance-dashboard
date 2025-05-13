@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  income: 3000.00,
-  groceries: 400.00,
-  utilities: 200.00,
-  entertainment: 150.00,
-  other: 250.00
+  income: 0.00,
+  groceries: 0.00,
+  utilities: 0.00,
+  entertainment: 0.00,
+  other: 0.00
 };
 
 export const budgetSlice = createSlice({

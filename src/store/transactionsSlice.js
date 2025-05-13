@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  transactions: [
-    { id: 1, amount: 50.00, category: 'groceries', date: '2025-04-25', description: 'Weekly shopping', type: 'expense' },
-    { id: 2, amount: 1200.00, category: 'income', date: '2025-04-24', description: 'Paycheck', type: 'income' }
-  ],
+  transactions: [],
 };
 
 export const transactionsSlice = createSlice({
