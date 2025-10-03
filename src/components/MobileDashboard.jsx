@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 const MobileDashboard = () => {
   const transactions = useSelector(state => state.transactions.transactions);
-  const budget = useSelector(state => state.budget);
   
   // Calculate totals
   const totalIncome = transactions
