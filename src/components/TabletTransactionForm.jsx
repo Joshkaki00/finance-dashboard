@@ -218,8 +218,9 @@ const TabletTransactionForm = () => {
             <h3 className="text-2xl font-semibold text-gray-800">Details</h3>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Date</label>
+              <label htmlFor="tablet-date" className="block text-sm font-medium text-gray-700 mb-3">Date</label>
               <input
+                id="tablet-date"
                 type="date"
                 name="date"
                 value={formData.date}
@@ -230,8 +231,9 @@ const TabletTransactionForm = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Description (Optional)</label>
+              <label htmlFor="tablet-description" className="block text-sm font-medium text-gray-700 mb-3">Description (Optional)</label>
               <textarea
+                id="tablet-description"
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
