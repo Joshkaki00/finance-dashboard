@@ -7,17 +7,23 @@ import Dashboard from './components/Dashboard';
 import BudgetForm from './components/BudgetForm';
 import FinancialTips from './components/FinancialTips';
 import MobileNavigation from './components/MobileNavigation';
+import TabletNavigation from './components/TabletNavigation';
 
 function App() {
   return (
     <Provider store={store}>
-      {/* Mobile Navigation (hidden on md and up) */}
+      {/* Mobile Navigation (< 768px) */}
       <div className="md:hidden">
         <MobileNavigation />
       </div>
 
-      {/* Desktop Layout (hidden on mobile) */}
-      <div className="hidden md:block min-h-screen bg-gray-100 py-4 sm:py-6 lg:py-8">
+      {/* Tablet Navigation (768px - 1279px) */}
+      <div className="hidden md:block xl:hidden">
+        <TabletNavigation />
+      </div>
+
+      {/* Desktop Layout (≥ 1280px) */}
+      <div className="hidden xl:block min-h-screen bg-gray-100 py-4 sm:py-6 lg:py-8">
         <div className="container mx-auto px-3 sm:px-4 lg:px-6 max-w-7xl">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 text-gray-800 px-2">
             Personal Finance Dashboard
