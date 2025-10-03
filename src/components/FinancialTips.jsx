@@ -15,11 +15,11 @@ const FinancialTips = () => {
   // Loading state
   if (status === 'loading') {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">Financial Wisdom</h2>
-        <div className="flex justify-center items-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-          <span className="ml-4 text-gray-600">Loading financial tips...</span>
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
+        <div className="flex justify-center items-center py-6 sm:py-8">
+          <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-500"></div>
+          <span className="ml-3 sm:ml-4 text-sm sm:text-base text-gray-600">Loading financial tips...</span>
         </div>
       </div>
     );
@@ -28,15 +28,15 @@ const FinancialTips = () => {
   // Error state
   if (status === 'failed') {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">Financial Wisdom</h2>
-        <div className="bg-red-100 border-l-4 border-red-500 p-4 mb-4">
-          <p className="text-red-700">
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
+        <div className="bg-red-50 border-l-4 border-red-400 p-3 sm:p-4 mb-4 rounded-r-md">
+          <p className="text-red-700 text-sm">
             <span className="font-bold">Error:</span> {error || 'Failed to load financial tips.'}
           </p>
           <button 
             onClick={() => dispatch(fetchFinancialTips())}
-            className="mt-2 bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded text-sm"
+            className="mt-2 bg-red-500 hover:bg-red-600 text-white font-medium py-1.5 px-3 rounded text-xs sm:text-sm transition-colors"
           >
             Try Again
           </button>
@@ -48,13 +48,13 @@ const FinancialTips = () => {
   // Empty state
   if (status === 'succeeded' && (!tips || tips.length === 0)) {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">Financial Wisdom</h2>
-        <div className="text-center py-8 text-gray-500">
-          <p>No financial tips available at the moment.</p>
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
+        <div className="text-center py-6 sm:py-8 text-gray-500">
+          <p className="text-sm sm:text-base">No financial tips available at the moment.</p>
           <button 
             onClick={() => dispatch(fetchFinancialTips())}
-            className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-3 rounded text-sm"
+            className="mt-3 sm:mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-1.5 px-3 rounded text-xs sm:text-sm transition-colors"
           >
             Refresh
           </button>
@@ -65,19 +65,21 @@ const FinancialTips = () => {
 
   // Success state with data
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Financial Wisdom</h2>
+    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
       
-      {tips.map((tip, index) => (
-        <div key={index} className="mb-4 pb-4 border-b border-gray-200 last:border-b-0 last:mb-0 last:pb-0">
-          <p className="text-gray-700 italic">"{tip.quote}"</p>
-          <p className="text-gray-600 text-sm mt-2">— {tip.author}</p>
-        </div>
-      ))}
+      <div className="space-y-3 sm:space-y-4">
+        {tips.map((tip) => (
+          <div key={`${tip.author}-${tip.quote.slice(0, 20)}`} className="pb-3 sm:pb-4 border-b border-gray-200 last:border-b-0 last:pb-0">
+            <p className="text-gray-700 italic text-sm sm:text-base leading-relaxed">"{tip.quote}"</p>
+            <p className="text-gray-600 text-xs sm:text-sm mt-2 font-medium">— {tip.author}</p>
+          </div>
+        ))}
+      </div>
       
       <button 
         onClick={() => dispatch(fetchFinancialTips())}
-        className="mt-2 bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-3 rounded text-sm"
+        className="mt-3 sm:mt-4 w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded text-sm transition-colors"
       >
         Get New Tips
       </button>

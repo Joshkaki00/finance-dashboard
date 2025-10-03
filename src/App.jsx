@@ -10,20 +10,23 @@ import FinancialTips from './components/FinancialTips';
 function App() {
   return (
     <Provider store={store}>
-      <div className="min-h-screen bg-gray-100 py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
+      <div className="min-h-screen bg-gray-100 py-4 sm:py-6 lg:py-8">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-6 max-w-7xl">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 text-gray-800 px-2">
             Personal Finance Dashboard
           </h1>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-1 space-y-6">
+          {/* Mobile-first responsive grid */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
+            {/* Forms and Tips Section */}
+            <div className="xl:col-span-1 space-y-4 sm:space-y-6">
               <TransactionForm />
               <BudgetForm />
               <FinancialTips />
             </div>
             
-            <div className="lg:col-span-2 space-y-6">
+            {/* Dashboard and Transactions Section */}
+            <div className="xl:col-span-2 space-y-4 sm:space-y-6">
               <Dashboard />
               <TransactionList />
             </div>

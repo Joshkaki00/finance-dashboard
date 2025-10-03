@@ -37,14 +37,14 @@ const TransactionList = () => {
   // Empty state
   if (transactions.length === 0) {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">Transactions</h2>
-        <div className="text-center py-10 text-gray-500">
-          <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Transactions</h2>
+        <div className="text-center py-8 sm:py-10 text-gray-500">
+          <svg className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
           </svg>
-          <p className="mt-2 text-lg">No transactions yet</p>
-          <p className="mt-1">Add a transaction to get started!</p>
+          <p className="mt-2 text-base sm:text-lg font-medium">No transactions yet</p>
+          <p className="mt-1 text-sm sm:text-base">Add a transaction to get started!</p>
         </div>
       </div>
     );
@@ -53,35 +53,41 @@ const TransactionList = () => {
   // Empty state after filtering
   if (filteredTransactions.length === 0) {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">Transactions</h2>
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Transactions</h2>
         
-        <div className="flex gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-4">
           <button
             onClick={() => setFilter('all')}
-            className={`px-3 py-1 rounded-md ${filter === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              filter === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
           >
-            All
+            All ({transactions.length})
           </button>
           <button
             onClick={() => setFilter('income')}
-            className={`px-3 py-1 rounded-md ${filter === 'income' ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              filter === 'income' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
           >
-            Income
+            Income ({transactions.filter(t => t.type === 'income').length})
           </button>
           <button
             onClick={() => setFilter('expense')}
-            className={`px-3 py-1 rounded-md ${filter === 'expense' ? 'bg-red-500 text-white' : 'bg-gray-200'}`}
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              filter === 'expense' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
           >
-            Expenses
+            Expenses ({transactions.filter(t => t.type === 'expense').length})
           </button>
         </div>
         
-        <div className="text-center py-8 text-gray-500">
-          <p>No {filter} transactions found.</p>
+        <div className="text-center py-6 sm:py-8 text-gray-500">
+          <p className="text-sm sm:text-base">No {filter} transactions found.</p>
           <button 
             onClick={() => setFilter('all')}
-            className="mt-2 underline text-blue-500"
+            className="mt-2 text-sm underline text-blue-500 hover:text-blue-700 transition-colors"
           >
             View all transactions
           </button>
@@ -91,62 +97,110 @@ const TransactionList = () => {
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Transactions</h2>
+    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Transactions</h2>
       
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         <button
           onClick={() => setFilter('all')}
-          className={`px-3 py-1 rounded-md ${filter === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+            filter === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
         >
-          All
+          All ({transactions.length})
         </button>
         <button
           onClick={() => setFilter('income')}
-          className={`px-3 py-1 rounded-md ${filter === 'income' ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
+          className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+            filter === 'income' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
         >
-          Income
+          Income ({transactions.filter(t => t.type === 'income').length})
         </button>
         <button
           onClick={() => setFilter('expense')}
-          className={`px-3 py-1 rounded-md ${filter === 'expense' ? 'bg-red-500 text-white' : 'bg-gray-200'}`}
+          className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+            filter === 'expense' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
         >
-          Expenses
+          Expenses ({transactions.filter(t => t.type === 'expense').length})
         </button>
       </div>
       
-      <div className="overflow-x-auto">
+      {/* Mobile Card Layout */}
+      <div className="block sm:hidden space-y-3">
+        {filteredTransactions.map((transaction) => (
+          <div key={transaction.id} className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow">
+            <div className="flex justify-between items-start mb-2">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                    transaction.type === 'income' 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-red-100 text-red-800'
+                  }`}>
+                    {transaction.type}
+                  </span>
+                  <span className="text-xs text-gray-500">{formatDate(transaction.date)}</span>
+                </div>
+                <p className="font-medium text-gray-900 text-sm">
+                  {transaction.description || 'No description'}
+                </p>
+                <p className="text-xs text-gray-500 capitalize mt-1">
+                  {transaction.category}
+                </p>
+              </div>
+              <div className="text-right ml-3">
+                <p className={`text-lg font-bold ${
+                  transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+                }`}>
+                  {transaction.type === 'income' ? '+' : '−'} {formatCurrency(transaction.amount)}
+                </p>
+                <button
+                  onClick={() => handleDelete(transaction.id)}
+                  className="text-xs text-red-600 hover:text-red-800 mt-1 underline"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Table Layout */}
+      <div className="hidden sm:block overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+              <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+              <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+              <th className="px-4 lg:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredTransactions.map((transaction) => (
-              <tr key={transaction.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <tr key={transaction.id} className="hover:bg-gray-50 transition-colors">
+                <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {formatDate(transaction.date)}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-900">
+                <td className="px-4 lg:px-6 py-4 text-sm text-gray-900 max-w-xs truncate">
                   {transaction.description || '—'}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">
+                <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">
                   {transaction.category}
                 </td>
-                <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
+                <td className={`px-4 lg:px-6 py-4 whitespace-nowrap text-sm font-medium ${
                   transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
                 }`}>
                   {transaction.type === 'income' ? '+' : '−'} {formatCurrency(transaction.amount)}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button
                     onClick={() => handleDelete(transaction.id)}
-                    className="text-red-600 hover:text-red-900"
+                    className="text-red-600 hover:text-red-900 transition-colors"
                   >
                     Delete
                   </button>

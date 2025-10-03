@@ -50,63 +50,78 @@ const TransactionForm = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Add Transaction</h2>
+    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Add Transaction</h2>
       
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="flex gap-4 items-center">
-            <span className="text-gray-700">Type:</span>
-            <div className="flex gap-4">
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  name="type"
-                  value="expense"
-                  checked={formData.type === 'expense'}
-                  onChange={handleChange}
-                  className="h-4 w-4 text-blue-600"
-                />
-                <span className="ml-2 text-gray-700">Expense</span>
-              </label>
-              
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  name="type"
-                  value="income"
-                  checked={formData.type === 'income'}
-                  onChange={handleChange}
-                  className="h-4 w-4 text-blue-600"
-                />
-                <span className="ml-2 text-gray-700">Income</span>
-              </label>
-            </div>
-          </label>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <fieldset>
+          <legend className="block text-sm font-medium text-gray-700 mb-2">Type:</legend>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                name="type"
+                value="expense"
+                checked={formData.type === 'expense'}
+                onChange={handleChange}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+              />
+              <span className="ml-2 text-sm text-gray-700">Expense</span>
+            </label>
+            
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                name="type"
+                value="income"
+                checked={formData.type === 'income'}
+                onChange={handleChange}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+              />
+              <span className="ml-2 text-sm text-gray-700">Income</span>
+            </label>
+          </div>
+        </fieldset>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">Amount:</label>
+            <input
+              id="amount"
+              type="number"
+              name="amount"
+              value={formData.amount}
+              onChange={handleChange}
+              min="0.01"
+              step="0.01"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-2 px-3"
+              placeholder="0.00"
+              required
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">Date:</label>
+            <input
+              id="date"
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-2 px-3"
+              required
+            />
+          </div>
         </div>
         
-        <div className="mb-4">
-          <label className="block text-gray-700">Amount:</label>
-          <input
-            type="number"
-            name="amount"
-            value={formData.amount}
-            onChange={handleChange}
-            min="0.01"
-            step="0.01"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            placeholder="0.00"
-            required
-          />
-        </div>
-        
-        <div className="mb-4">
-          <label className="block text-gray-700">Category:</label>
+        <div>
+          <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">Category:</label>
           <select
+            id="category"
             name="category"
             value={formData.category}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-2 px-3"
             required
           >
             <option value="">Select a category</option>
@@ -118,33 +133,22 @@ const TransactionForm = () => {
           </select>
         </div>
         
-        <div className="mb-4">
-          <label className="block text-gray-700">Date:</label>
+        <div>
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Description:</label>
           <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            required
-          />
-        </div>
-        
-        <div className="mb-4">
-          <label className="block text-gray-700">Description:</label>
-          <input
+            id="description"
             type="text"
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            placeholder="Brief description"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm py-2 px-3"
+            placeholder="Brief description (optional)"
           />
         </div>
         
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors text-sm sm:text-base"
         >
           Add Transaction
         </button>
