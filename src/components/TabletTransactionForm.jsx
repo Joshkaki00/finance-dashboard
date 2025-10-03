@@ -252,9 +252,12 @@ const TabletTransactionForm = () => {
             disabled={!formData.amount || !formData.category}
             className={`w-full py-6 px-8 rounded-2xl font-semibold text-xl transition-all duration-200 ${
               formData.amount && formData.category
-                ? formData.type === 'income'
-                  ? 'bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105'
-                  : 'bg-red-500 hover:bg-red-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105'
+                ? (() => {
+                    if (formData.type === 'income') {
+                      return 'bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105';
+                    }
+                    return 'bg-red-500 hover:bg-red-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105';
+                  })()
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
