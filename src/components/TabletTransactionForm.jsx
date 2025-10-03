@@ -146,10 +146,11 @@ const TabletTransactionForm = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Amount Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Enter Amount</label>
+              <label htmlFor="tablet-amount" className="block text-sm font-medium text-gray-700 mb-3">Enter Amount</label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-2xl font-semibold">$</span>
                 <input
+                  id="tablet-amount"
                   type="number"
                   name="amount"
                   value={formData.amount}
