@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TransactionForm from './TransactionForm';
+import MobileTransactionForm from './MobileTransactionForm';
 import TransactionList from './TransactionList';
 import MobileDashboard from './MobileDashboard';
 import BudgetForm from './BudgetForm';
