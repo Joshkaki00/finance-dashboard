@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TransactionForm from './TransactionForm';
 import TransactionList from './TransactionList';
-import Dashboard from './Dashboard';
+import MobileDashboard from './MobileDashboard';
 import BudgetForm from './BudgetForm';
 import FinancialTips from './FinancialTips';
 
