@@ -77,10 +77,11 @@ const BudgetForm = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {categories.map(category => (
               <div key={category} className="space-y-1">
-                <label className="block text-sm font-medium text-gray-700 capitalize">
+                <label htmlFor={`budget-${category}`} className="block text-sm font-medium text-gray-700 capitalize">
                   {category} Budget
                 </label>
                 <input
+                  id={`budget-${category}`}
                   type="number"
                   name={category}
                   value={budgetValues[category] || ''}
@@ -89,8 +90,9 @@ const BudgetForm = () => {
                   step="0.01"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   placeholder={`${category} budget`}
+                  aria-describedby={`budget-${category}-current`}
                 />
-                <p className="text-xs text-gray-500">
+                <p id={`budget-${category}-current`} className="text-xs text-gray-500">
                   Current: {formatCurrency(budget[category] || 0)}
                 </p>
               </div>

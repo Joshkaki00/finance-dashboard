@@ -97,15 +97,19 @@ const TransactionList = () => {
   }
 
   return (
-    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Transactions</h2>
+    <section className="bg-white p-4 sm:p-6 rounded-lg shadow-md" aria-labelledby="transactions-heading">
+      <h2 id="transactions-heading" className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Transactions</h2>
       
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4" role="tablist" aria-label="Transaction filters">
         <button
           onClick={() => setFilter('all')}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
             filter === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }`}
+          role="tab"
+          aria-selected={filter === 'all'}
+          aria-controls="transactions-content"
+          id="filter-all"
         >
           All ({transactions.length})
         </button>
@@ -114,6 +118,10 @@ const TransactionList = () => {
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
             filter === 'income' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }`}
+          role="tab"
+          aria-selected={filter === 'income'}
+          aria-controls="transactions-content"
+          id="filter-income"
         >
           Income ({transactions.filter(t => t.type === 'income').length})
         </button>
@@ -122,15 +130,28 @@ const TransactionList = () => {
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
             filter === 'expense' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }`}
+          role="tab"
+          aria-selected={filter === 'expense'}
+          aria-controls="transactions-content"
+          id="filter-expense"
         >
           Expenses ({transactions.filter(t => t.type === 'expense').length})
         </button>
       </div>
       
       {/* Mobile Card Layout */}
-      <div className="block sm:hidden space-y-3">
+      <div 
+        className="block sm:hidden space-y-3"
+        id="transactions-content"
+        role="tabpanel"
+        aria-labelledby={`filter-${filter}`}
+      >
         {filteredTransactions.map((transaction) => (
-          <div key={transaction.id} className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow">
+          <article 
+            key={transaction.id} 
+            className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow"
+            aria-labelledby={`transaction-${transaction.id}-title`}
+          >
             <div className="flex justify-between items-start mb-2">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
@@ -141,11 +162,16 @@ const TransactionList = () => {
                   }`}>
                     {transaction.type}
                   </span>
-                  <span className="text-xs text-gray-500">{formatDate(transaction.date)}</span>
+                  <time className="text-xs text-gray-500" dateTime={transaction.date}>
+                    {formatDate(transaction.date)}
+                  </time>
                 </div>
-                <p className="font-medium text-gray-900 text-sm">
+                <h3 
+                  id={`transaction-${transaction.id}-title`}
+                  className="font-medium text-gray-900 text-sm"
+                >
                   {transaction.description || 'No description'}
-                </p>
+                </h3>
                 <p className="text-xs text-gray-500 capitalize mt-1">
                   {transaction.category}
                 </p>
@@ -154,37 +180,45 @@ const TransactionList = () => {
                 <p className={`text-lg font-bold ${
                   transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
                 }`}>
-                  {transaction.type === 'income' ? '+' : '−'} {formatCurrency(transaction.amount)}
+                  <span aria-label={transaction.type === 'income' ? 'Income' : 'Expense'}>
+                    {transaction.type === 'income' ? '+' : '−'}
+                  </span> {formatCurrency(transaction.amount)}
                 </p>
                 <button
                   onClick={() => handleDelete(transaction.id)}
-                  className="text-xs text-red-600 hover:text-red-800 mt-1 underline"
+                  className="text-xs text-red-600 hover:text-red-800 mt-1 underline focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 rounded"
+                  aria-label={`Delete transaction: ${transaction.description || transaction.category} ${formatCurrency(transaction.amount)}`}
                 >
                   Delete
                 </button>
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
 
       {/* Desktop Table Layout */}
-      <div className="hidden sm:block overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
+      <div 
+        className="hidden sm:block overflow-x-auto"
+        id="transactions-content"
+        role="tabpanel"
+        aria-labelledby={`filter-${filter}`}
+      >
+        <table className="min-w-full divide-y divide-gray-200" role="table" aria-label="Transaction history">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-              <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-              <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-              <th className="px-4 lg:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th scope="col" className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th scope="col" className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+              <th scope="col" className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+              <th scope="col" className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+              <th scope="col" className="px-4 lg:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredTransactions.map((transaction) => (
               <tr key={transaction.id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {formatDate(transaction.date)}
+                  <time dateTime={transaction.date}>{formatDate(transaction.date)}</time>
                 </td>
                 <td className="px-4 lg:px-6 py-4 text-sm text-gray-900 max-w-xs truncate">
                   {transaction.description || '—'}
@@ -195,12 +229,15 @@ const TransactionList = () => {
                 <td className={`px-4 lg:px-6 py-4 whitespace-nowrap text-sm font-medium ${
                   transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
                 }`}>
-                  {transaction.type === 'income' ? '+' : '−'} {formatCurrency(transaction.amount)}
+                  <span aria-label={transaction.type === 'income' ? 'Income' : 'Expense'}>
+                    {transaction.type === 'income' ? '+' : '−'}
+                  </span> {formatCurrency(transaction.amount)}
                 </td>
                 <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button
                     onClick={() => handleDelete(transaction.id)}
-                    className="text-red-600 hover:text-red-900 transition-colors"
+                    className="text-red-600 hover:text-red-900 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 rounded px-2 py-1"
+                    aria-label={`Delete transaction: ${transaction.description || transaction.category} ${formatCurrency(transaction.amount)}`}
                   >
                     Delete
                   </button>
@@ -210,7 +247,7 @@ const TransactionList = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
   );
 };
 
