@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { store } from './store'
 import App from './App'
 import './index.css'
+import { measurePerformance, preloadCriticalResources, registerServiceWorker } from './utils/performance'
 
 // Add app loaded class to hide loading spinner
 const root = ReactDOM.createRoot(document.getElementById('root'));
