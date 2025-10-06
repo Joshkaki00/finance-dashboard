@@ -1,0 +1,60 @@
+{
+  "name": "Personal Finance Dashboard",
+  "short_name": "Finance Dashboard",
+  "description": "A modern, responsive personal finance dashboard with accessibility features",
+  "start_url": "/finance-dashboard/",
+  "display": "standalone",
+  "background_color": "#f3f4f6",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "categories": ["finance", "productivity", "business"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/finance-dashboard/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/finance-dashboard/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/finance-dashboard/screenshot-desktop.png", 
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Add Transaction",
+      "short_name": "Add",
+      "description": "Quickly add a new transaction",
+      "url": "/finance-dashboard/?view=add",
+      "icons": [
+        {
+          "src": "/finance-dashboard/vite.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "View Dashboard",
+      "short_name": "Dashboard", 
+      "description": "View financial overview",
+      "url": "/finance-dashboard/?view=dashboard",
+      "icons": [
+        {
+          "src": "/finance-dashboard/vite.svg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
