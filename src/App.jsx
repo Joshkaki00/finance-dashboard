@@ -7,6 +7,7 @@ import LazyFinancialTips from './components/LazyFinancialTips';
 import MobileNavigation from './components/MobileNavigation';
 import TabletNavigation from './components/TabletNavigation';
 import AccessibilityAssistant from './components/AccessibilityAssistant';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   return (
