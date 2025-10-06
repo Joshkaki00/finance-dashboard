@@ -10,7 +10,7 @@ import AccessibilityAssistant from './components/AccessibilityAssistant';
 
 function App() {
   return (
-    <Provider store={store}>
+    <>
       {/* Skip to content link for keyboard navigation - WCAG 2.4.1 */}
       <a 
         href="#main-content" 
@@ -52,7 +52,7 @@ function App() {
               >
                 <TransactionForm />
                 <BudgetForm />
-                <FinancialTips />
+                <LazyFinancialTips />
               </section>
               
               {/* Dashboard and Transactions Section */}
