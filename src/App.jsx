@@ -1,11 +1,9 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { store } from './store';
 import TransactionForm from './components/TransactionForm';
 import TransactionList from './components/TransactionList';
-import Dashboard from './components/Dashboard';
+import LazyDashboard from './components/LazyDashboard';
 import BudgetForm from './components/BudgetForm';
-import FinancialTips from './components/FinancialTips';
+import LazyFinancialTips from './components/LazyFinancialTips';
 import MobileNavigation from './components/MobileNavigation';
 import TabletNavigation from './components/TabletNavigation';
 import AccessibilityAssistant from './components/AccessibilityAssistant';
