@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* CSS Variables for accessibility */
+:root {
+  --text-scale: 1.1;
+  --focus-ring-color: #3b82f6;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}
+
 /* Screen reader only text - WCAG 2.2 compliance */
 .sr-only {
   position: absolute;
