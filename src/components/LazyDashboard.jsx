@@ -1,7 +1,27 @@
 import React, { Suspense, lazy } from 'react';
 
-// Lazy load the Dashboard component to reduce initial bundle size
-const Dashboard = lazy(() => import('./Dashboard'));
+// Lazy load the Dashboard component with proper error boundary
+const Dashboard = lazy(() => 
+  import('./Dashboard').catch(error => {
+    console.error('Failed to load Dashboard component:', error);
+    // Return a fallback component
+    return { 
+      default: () => (
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="text-center py-8">
+            <p className="text-gray-500 mb-4">Unable to load dashboard</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      )
+    };
+  })
+);
 
 // Loading component for better perceived performance
 const DashboardSkeleton = () => (
