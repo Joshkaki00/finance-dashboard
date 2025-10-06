@@ -33,6 +33,7 @@
     "globals": "^16.0.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.5",
+    "terser": "^5.44.0",
     "vite": "^6.3.5"
   },
   "description": "A modern, responsive personal finance dashboard built with React, Redux, and Tailwind CSS. Features mobile/tablet/desktop optimized layouts with full WCAG 2.2 accessibility compliance.",
