@@ -69,6 +69,9 @@ function App() {
           </main>
         </div>
       </div>
+
+      {/* Accessibility Assistant - Available on all layouts */}
+      <AccessibilityAssistant />
     </Provider>
   );
 }
