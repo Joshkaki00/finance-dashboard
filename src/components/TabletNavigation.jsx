@@ -1,23 +1,9 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState } from 'react';
 import TabletTransactionForm from './TabletTransactionForm';
 import TransactionList from './TransactionList';
 import BudgetForm from './BudgetForm';
-
-// Lazy load heavy components
-const TabletDashboard = lazy(() => import('./TabletDashboard'));
-const FinancialTips = lazy(() => import('./FinancialTips'));
-
-// Loading skeleton for tablet components
-const TabletComponentSkeleton = () => (
-  <div className="animate-pulse space-y-6">
-    <div className="h-6 bg-gray-200 rounded w-1/2"></div>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="h-48 bg-gray-200 rounded"></div>
-      <div className="h-48 bg-gray-200 rounded"></div>
-    </div>
-    <div className="h-64 bg-gray-200 rounded"></div>
-  </div>
-);
+import TabletDashboard from './TabletDashboard';
+import FinancialTips from './FinancialTips';
 
 const TabletNavigation = () => {
   const [activeView, setActiveView] = useState('dashboard');
@@ -31,11 +17,7 @@ const TabletNavigation = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
       ),
-      component: (
-        <Suspense fallback={<TabletComponentSkeleton />}>
-          <TabletDashboard />
-        </Suspense>
-      ),
+      component: <TabletDashboard />,
       description: 'Financial overview and insights'
     },
     {
