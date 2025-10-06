@@ -62,7 +62,7 @@ function App() {
                 aria-label="Financial overview and transaction history"
               >
                 <ErrorBoundary fallbackMessage="Unable to load dashboard">
-                  <LazyDashboard />
+                  <Dashboard />
                 </ErrorBoundary>
                 <TransactionList />
               </section>
