@@ -1,0 +1,319 @@
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { 
+  setHighContrast, 
+  setTextSize, 
+  setReducedMotion, 
+  setEnhancedFocus,
+  setKeyboardHelper 
+} from '../store/accessibilitySlice';
+
+const AccessibilityAssistant = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const accessibility = useSelector(state => state.accessibility);
+
+  // Apply accessibility settings to document
+  useEffect(() => {
+    const root = document.documentElement;
+    
+    // High contrast mode
+    if (accessibility.highContrast) {
+      root.classList.add('high-contrast');
+    } else {
+      root.classList.remove('high-contrast');
+    }
+
+    // Text size scaling
+    root.style.setProperty('--text-scale', accessibility.textSize);
+
+    // Reduced motion
+    if (accessibility.reducedMotion) {
+      root.classList.add('reduced-motion');
+    } else {
+      root.classList.remove('reduced-motion');
+    }
+
+    // Enhanced focus
+    if (accessibility.enhancedFocus) {
+      root.classList.add('enhanced-focus');
+    } else {
+      root.classList.remove('enhanced-focus');
+    }
+
+    // Keyboard helper
+    if (accessibility.keyboardHelper) {
+      root.classList.add('keyboard-helper');
+    } else {
+      root.classList.remove('keyboard-helper');
+    }
+  }, [accessibility]);
+
+  // Keyboard navigation for the panel
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      setIsOpen(false);
+    }
+  };
+
+  const toggleHighContrast = () => {
+    dispatch(setHighContrast(!accessibility.highContrast));
+  };
+
+  const handleTextSizeChange = (size) => {
+    dispatch(setTextSize(size));
+  };
+
+  const toggleReducedMotion = () => {
+    dispatch(setReducedMotion(!accessibility.reducedMotion));
+  };
+
+  const toggleEnhancedFocus = () => {
+    dispatch(setEnhancedFocus(!accessibility.enhancedFocus));
+  };
+
+  const toggleKeyboardHelper = () => {
+    dispatch(setKeyboardHelper(!accessibility.keyboardHelper));
+  };
+
+  return (
+    <>
+      {/* Accessibility Button - Fixed Position */}
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-4 right-4 z-50 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300"
+        aria-label="Open accessibility options"
+        aria-expanded={isOpen}
+        aria-controls="accessibility-panel"
+        title="Accessibility Options"
+      >
+        <svg 
+          className="w-6 h-6" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" 
+          />
+        </svg>
+      </button>
+
+      {/* Accessibility Panel */}
+      {isOpen && (
+        <div
+          id="accessibility-panel"
+          className="fixed bottom-20 right-4 z-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl p-6 w-80 max-w-[calc(100vw-2rem)]"
+          role="dialog"
+          aria-labelledby="accessibility-title"
+          aria-modal="true"
+          onKeyDown={handleKeyDown}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4">
+            <h2 
+              id="accessibility-title"
+              className="text-lg font-semibold text-gray-900 dark:text-white"
+            >
+              Accessibility Options
+            </h2>
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Close accessibility options"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Options */}
+          <div className="space-y-4">
+            {/* High Contrast */}
+            <div className="flex items-center justify-between">
+              <label 
+                htmlFor="high-contrast-toggle"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                High Contrast Mode
+              </label>
+              <button
+                id="high-contrast-toggle"
+                type="button"
+                onClick={toggleHighContrast}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                  accessibility.highContrast ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
+                }`}
+                role="switch"
+                aria-checked={accessibility.highContrast}
+                aria-describedby="high-contrast-description"
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    accessibility.highContrast ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+            <p id="high-contrast-description" className="text-xs text-gray-500 dark:text-gray-400">
+              Increases color contrast for better visibility
+            </p>
+
+            {/* Text Size */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Text Size
+              </label>
+              <div className="flex space-x-2">
+                {[
+                  { value: '1', label: 'Small' },
+                  { value: '1.1', label: 'Normal' },
+                  { value: '1.25', label: 'Large' },
+                  { value: '1.5', label: 'Extra Large' }
+                ].map((size) => (
+                  <button
+                    key={size.value}
+                    type="button"
+                    onClick={() => handleTextSizeChange(size.value)}
+                    className={`px-3 py-1 text-xs rounded border transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      accessibility.textSize === size.value
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
+                    }`}
+                    aria-pressed={accessibility.textSize === size.value}
+                  >
+                    {size.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Reduced Motion */}
+            <div className="flex items-center justify-between">
+              <label 
+                htmlFor="reduced-motion-toggle"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Reduce Motion
+              </label>
+              <button
+                id="reduced-motion-toggle"
+                type="button"
+                onClick={toggleReducedMotion}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                  accessibility.reducedMotion ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
+                }`}
+                role="switch"
+                aria-checked={accessibility.reducedMotion}
+                aria-describedby="reduced-motion-description"
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    accessibility.reducedMotion ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+            <p id="reduced-motion-description" className="text-xs text-gray-500 dark:text-gray-400">
+              Minimizes animations and transitions
+            </p>
+
+            {/* Enhanced Focus */}
+            <div className="flex items-center justify-between">
+              <label 
+                htmlFor="enhanced-focus-toggle"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Enhanced Focus
+              </label>
+              <button
+                id="enhanced-focus-toggle"
+                type="button"
+                onClick={toggleEnhancedFocus}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                  accessibility.enhancedFocus ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
+                }`}
+                role="switch"
+                aria-checked={accessibility.enhancedFocus}
+                aria-describedby="enhanced-focus-description"
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    accessibility.enhancedFocus ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+            <p id="enhanced-focus-description" className="text-xs text-gray-500 dark:text-gray-400">
+              Makes focus indicators more visible
+            </p>
+
+            {/* Keyboard Helper */}
+            <div className="flex items-center justify-between">
+              <label 
+                htmlFor="keyboard-helper-toggle"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Keyboard Navigation Helper
+              </label>
+              <button
+                id="keyboard-helper-toggle"
+                type="button"
+                onClick={toggleKeyboardHelper}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                  accessibility.keyboardHelper ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
+                }`}
+                role="switch"
+                aria-checked={accessibility.keyboardHelper}
+                aria-describedby="keyboard-helper-description"
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    accessibility.keyboardHelper ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+            <p id="keyboard-helper-description" className="text-xs text-gray-500 dark:text-gray-400">
+              Shows keyboard shortcuts and navigation hints
+            </p>
+          </div>
+
+          {/* Keyboard Shortcuts Info */}
+          {accessibility.keyboardHelper && (
+            <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <h3 className="text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">
+                Keyboard Shortcuts
+              </h3>
+              <ul className="text-xs text-blue-800 dark:text-blue-300 space-y-1">
+                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Tab</kbd> - Navigate forward</li>
+                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Shift+Tab</kbd> - Navigate backward</li>
+                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Enter/Space</kbd> - Activate buttons</li>
+                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Esc</kbd> - Close dialogs</li>
+                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Arrow keys</kbd> - Navigate lists</li>
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black bg-opacity-25"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+    </>
+  );
+};
+
+export default AccessibilityAssistant;
