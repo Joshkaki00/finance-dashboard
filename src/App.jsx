@@ -60,7 +60,7 @@ function App() {
                 className="xl:col-span-2 space-y-4 sm:space-y-6"
                 aria-label="Financial overview and transaction history"
               >
-                <Dashboard />
+                <LazyDashboard />
                 <TransactionList />
               </section>
             </div>
