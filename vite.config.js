@@ -26,38 +26,13 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Improved manual chunking for better caching and loading
-        manualChunks: (id) => {
-          // Vendor chunk for core React libraries
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'vendor';
-            }
-            // Redux chunk
-            if (id.includes('@reduxjs/toolkit') || id.includes('react-redux')) {
-              return 'redux';
-            }
-            // Charts chunk (lazy loaded)
-            if (id.includes('recharts')) {
-              return 'charts';
-            }
-            // Other vendor libraries
-            return 'libs';
-          }
-          // App chunks
-          if (id.includes('/components/')) {
-            // Separate chunk for dashboard components (heavy)
-            if (id.includes('Dashboard') || id.includes('Chart')) {
-              return 'dashboard';
-            }
-            // Mobile/tablet specific components
-            if (id.includes('Mobile') || id.includes('Tablet')) {
-              return 'responsive';
-            }
-            // Form components
-            if (id.includes('Form')) {
-              return 'forms';
-            }
-          }
+        manualChunks: {
+          // Core React libraries
+          vendor: ['react', 'react-dom'],
+          // Redux state management
+          redux: ['@reduxjs/toolkit', 'react-redux'],
+          // Charts library - keep as separate chunk but don't lazy load
+          charts: ['recharts']
         },
         // Better file naming for caching
         chunkFileNames: 'assets/[name]-[hash].js',
