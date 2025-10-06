@@ -8,6 +8,7 @@ import BudgetForm from './components/BudgetForm';
 import FinancialTips from './components/FinancialTips';
 import MobileNavigation from './components/MobileNavigation';
 import TabletNavigation from './components/TabletNavigation';
+import AccessibilityAssistant from './components/AccessibilityAssistant';
 
 function App() {
   return (
