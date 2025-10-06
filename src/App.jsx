@@ -3,7 +3,7 @@ import TransactionForm from './components/TransactionForm';
 import TransactionList from './components/TransactionList';
 import Dashboard from './components/Dashboard';
 import BudgetForm from './components/BudgetForm';
-import LazyFinancialTips from './components/LazyFinancialTips';
+import FinancialTips from './components/FinancialTips';
 import MobileNavigation from './components/MobileNavigation';
 import TabletNavigation from './components/TabletNavigation';
 import AccessibilityAssistant from './components/AccessibilityAssistant';
@@ -53,7 +53,7 @@ function App() {
               >
                 <TransactionForm />
                 <BudgetForm />
-                <LazyFinancialTips />
+                <FinancialTips />
               </section>
               
               {/* Dashboard and Transactions Section */}
