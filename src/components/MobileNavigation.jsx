@@ -1,21 +1,9 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState } from 'react';
 import MobileTransactionForm from './MobileTransactionForm';
 import TransactionList from './TransactionList';
 import BudgetForm from './BudgetForm';
-
-// Lazy load heavy components
-const MobileDashboard = lazy(() => import('./MobileDashboard'));
-const FinancialTips = lazy(() => import('./FinancialTips'));
-
-// Loading skeleton for mobile components
-const MobileComponentSkeleton = () => (
-  <div className="animate-pulse space-y-4">
-    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-    <div className="h-32 bg-gray-200 rounded"></div>
-    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-    <div className="h-24 bg-gray-200 rounded"></div>
-  </div>
-);
+import MobileDashboard from './MobileDashboard';
+import FinancialTips from './FinancialTips';
 
 const MobileNavigation = () => {
   const [activeView, setActiveView] = useState('dashboard');
