@@ -20,7 +20,14 @@ root.render(
   </React.StrictMode>
 );
 
+// Initialize performance monitoring
+measurePerformance();
+preloadCriticalResources();
+
 // Hide loading spinner once React has mounted
 setTimeout(() => {
   document.body.classList.add('app-loaded');
 }, 100);
+
+// Register service worker for caching
+registerServiceWorker();
