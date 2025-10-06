@@ -70,7 +70,7 @@ function App() {
 
       {/* Accessibility Assistant - Available on all layouts */}
       <AccessibilityAssistant />
-    </Provider>
+    </>
   );
 }
 
