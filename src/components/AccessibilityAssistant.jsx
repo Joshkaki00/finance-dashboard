@@ -206,29 +206,41 @@ const AccessibilityAssistant = () => {
             </div>
 
             {/* Text Size */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Text Size
-              </label>
-              <div className="flex space-x-2">
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-2 border-gray-200 dark:border-gray-700">
+              <div className="flex items-center space-x-3 mb-3">
+                <span className="text-2xl" role="img" aria-label="Text size icon">📝</span>
+                <label className="text-base font-semibold text-gray-900 dark:text-white">
+                  Text Size
+                </label>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 ml-11">
+                <strong>For:</strong> Low vision, dyslexia, reading difficulties<br/>
+                <strong>Effect:</strong> Makes all text larger and easier to read
+              </p>
+              <div className="grid grid-cols-2 gap-3">
                 {[
-                  { value: '1', label: 'Small' },
-                  { value: '1.1', label: 'Normal' },
-                  { value: '1.25', label: 'Large' },
-                  { value: '1.5', label: 'Extra Large' }
+                  { value: '1', label: 'Small', icon: '🔤', description: '100%' },
+                  { value: '1.1', label: 'Normal', icon: '🔠', description: '110%' },
+                  { value: '1.25', label: 'Large', icon: '🔡', description: '125%' },
+                  { value: '1.5', label: 'Extra Large', icon: '🔢', description: '150%' }
                 ].map((size) => (
                   <button
                     key={size.value}
                     type="button"
                     onClick={() => handleTextSizeChange(size.value)}
-                    className={`px-3 py-1 text-xs rounded border transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`p-3 text-sm rounded-lg border-2 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-yellow-400 hover:scale-105 ${
                       accessibility.textSize === size.value
-                        ? 'bg-blue-600 text-white border-blue-600'
-                        : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
+                        ? 'bg-green-600 text-white border-green-700 shadow-lg'
+                        : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
                     }`}
                     aria-pressed={accessibility.textSize === size.value}
+                    style={{ minHeight: '60px' }}
                   >
-                    {size.label}
+                    <div className="flex flex-col items-center space-y-1">
+                      <span className="text-lg" role="img" aria-hidden="true">{size.icon}</span>
+                      <span className="font-semibold">{size.label}</span>
+                      <span className="text-xs opacity-75">{size.description}</span>
+                    </div>
                   </button>
                 ))}
               </div>
