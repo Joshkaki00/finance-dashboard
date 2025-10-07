@@ -3,9 +3,19 @@
 /* CSS Variables for accessibility */
 :root {
   --text-scale: 1.1;
-  --focus-ring-color: #3b82f6;
-  --focus-ring-width: 2px;
-  --focus-ring-offset: 2px;
+  --focus-ring-color: #eab308; /* Yellow for better visibility */
+  --focus-ring-width: 4px;
+  --focus-ring-offset: 4px;
+  
+  /* Dyslexia-friendly font stack */
+  --dyslexia-font: 'OpenDyslexic', 'Comic Sans MS', 'Arial', system-ui, -apple-system, sans-serif;
+  
+  /* Color-blind friendly palette */
+  --cb-primary: #1f2937; /* Dark gray instead of pure blue */
+  --cb-success: #059669; /* Emerald green */
+  --cb-warning: #d97706; /* Amber */
+  --cb-error: #dc2626; /* Red with good contrast */
+  --cb-info: #0891b2; /* Cyan */
 }
 
 /* Screen reader only text - WCAG 2.2 compliance */
