@@ -226,123 +226,108 @@ const AccessibilityAssistant = () => {
             </div>
 
             {/* Reduced Motion */}
-            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="text-lg" role="img" aria-label="Reduced motion icon">🐌</span>
-                  <label 
-                    htmlFor="reduced-motion-toggle"
-                    className="text-sm font-semibold text-gray-900 dark:text-white cursor-pointer"
-                  >
-                    Reduce Motion
-                  </label>
-                </div>
-                <button
-                  id="reduced-motion-toggle"
-                  type="button"
-                  onClick={toggleReducedMotion}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 border ${
-                    accessibility.reducedMotion 
-                      ? 'bg-green-600 border-green-700' 
-                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
-                  }`}
-                  role="switch"
-                  aria-checked={accessibility.reducedMotion}
-                  aria-describedby="reduced-motion-description"
+            <div className="flex items-center justify-between p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm" role="img" aria-label="Reduced motion">🐌</span>
+                <label 
+                  htmlFor="reduced-motion-toggle"
+                  className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer"
                 >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 shadow ${
-                      accessibility.reducedMotion ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
-                  <span className="sr-only">
-                    {accessibility.reducedMotion ? 'Disable' : 'Enable'} reduced motion
-                  </span>
-                </button>
+                  Reduce Motion
+                </label>
               </div>
-              <p id="reduced-motion-description" className="text-xs text-gray-600 dark:text-gray-400 mt-1 ml-7">
-                Minimizes animations for motion sensitivity
-              </p>
+              <button
+                id="reduced-motion-toggle"
+                type="button"
+                onClick={toggleReducedMotion}
+                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
+                  accessibility.reducedMotion 
+                    ? 'bg-green-600' 
+                    : 'bg-gray-300 dark:bg-gray-600'
+                }`}
+                role="switch"
+                aria-checked={accessibility.reducedMotion}
+                title="Minimizes animations for motion sensitivity"
+              >
+                <span
+                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
+                    accessibility.reducedMotion ? 'translate-x-5' : 'translate-x-1'
+                  }`}
+                />
+                <span className="sr-only">
+                  {accessibility.reducedMotion ? 'Disable' : 'Enable'} reduced motion
+                </span>
+              </button>
             </div>
 
             {/* Enhanced Focus */}
-            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="text-lg" role="img" aria-label="Enhanced focus icon">🎯</span>
-                  <label 
-                    htmlFor="enhanced-focus-toggle"
-                    className="text-sm font-semibold text-gray-900 dark:text-white cursor-pointer"
-                  >
-                    Enhanced Focus
-                  </label>
-                </div>
-                <button
-                  id="enhanced-focus-toggle"
-                  type="button"
-                  onClick={toggleEnhancedFocus}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 border ${
-                    accessibility.enhancedFocus 
-                      ? 'bg-green-600 border-green-700' 
-                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
-                  }`}
-                  role="switch"
-                  aria-checked={accessibility.enhancedFocus}
-                  aria-describedby="enhanced-focus-description"
+            <div className="flex items-center justify-between p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm" role="img" aria-label="Enhanced focus">🎯</span>
+                <label 
+                  htmlFor="enhanced-focus-toggle"
+                  className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer"
                 >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 shadow ${
-                      accessibility.enhancedFocus ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
-                  <span className="sr-only">
-                    {accessibility.enhancedFocus ? 'Disable' : 'Enable'} enhanced focus indicators
-                  </span>
-                </button>
+                  Enhanced Focus
+                </label>
               </div>
-              <p id="enhanced-focus-description" className="text-xs text-gray-600 dark:text-gray-400 mt-1 ml-7">
-                Larger focus indicators for better visibility
-              </p>
+              <button
+                id="enhanced-focus-toggle"
+                type="button"
+                onClick={toggleEnhancedFocus}
+                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
+                  accessibility.enhancedFocus 
+                    ? 'bg-green-600' 
+                    : 'bg-gray-300 dark:bg-gray-600'
+                }`}
+                role="switch"
+                aria-checked={accessibility.enhancedFocus}
+                title="Larger focus indicators for better visibility"
+              >
+                <span
+                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
+                    accessibility.enhancedFocus ? 'translate-x-5' : 'translate-x-1'
+                  }`}
+                />
+                <span className="sr-only">
+                  {accessibility.enhancedFocus ? 'Disable' : 'Enable'} enhanced focus indicators
+                </span>
+              </button>
             </div>
 
             {/* Keyboard Helper */}
-            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="text-lg" role="img" aria-label="Keyboard helper icon">⌨️</span>
-                  <label 
-                    htmlFor="keyboard-helper-toggle"
-                    className="text-sm font-semibold text-gray-900 dark:text-white cursor-pointer"
-                  >
-                    Keyboard Helper
-                  </label>
-                </div>
-                <button
-                  id="keyboard-helper-toggle"
-                  type="button"
-                  onClick={toggleKeyboardHelper}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 border ${
-                    accessibility.keyboardHelper 
-                      ? 'bg-green-600 border-green-700' 
-                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
-                  }`}
-                  role="switch"
-                  aria-checked={accessibility.keyboardHelper}
-                  aria-describedby="keyboard-helper-description"
+            <div className="flex items-center justify-between p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm" role="img" aria-label="Keyboard helper">⌨️</span>
+                <label 
+                  htmlFor="keyboard-helper-toggle"
+                  className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer"
                 >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 shadow ${
-                      accessibility.keyboardHelper ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
-                  <span className="sr-only">
-                    {accessibility.keyboardHelper ? 'Disable' : 'Enable'} keyboard navigation helper
-                  </span>
-                </button>
+                  Keyboard Helper
+                </label>
               </div>
-              <p id="keyboard-helper-description" className="text-xs text-gray-600 dark:text-gray-400 mt-1 ml-7">
-                Shows keyboard shortcuts and navigation hints
-              </p>
+              <button
+                id="keyboard-helper-toggle"
+                type="button"
+                onClick={toggleKeyboardHelper}
+                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
+                  accessibility.keyboardHelper 
+                    ? 'bg-green-600' 
+                    : 'bg-gray-300 dark:bg-gray-600'
+                }`}
+                role="switch"
+                aria-checked={accessibility.keyboardHelper}
+                title="Shows keyboard shortcuts and navigation hints"
+              >
+                <span
+                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
+                    accessibility.keyboardHelper ? 'translate-x-5' : 'translate-x-1'
+                  }`}
+                />
+                <span className="sr-only">
+                  {accessibility.keyboardHelper ? 'Disable' : 'Enable'} keyboard navigation helper
+                </span>
+              </button>
             </div>
           </div>
 
