@@ -94,7 +94,7 @@ const AccessibilityAssistant = () => {
       >
         {/* Universal Accessibility Icon - Person with arms spread in a circle */}
         <svg 
-          className="w-7 h-7" 
+          className="w-6 h-6" 
           fill="currentColor" 
           viewBox="0 0 24 24"
           aria-hidden="true"
