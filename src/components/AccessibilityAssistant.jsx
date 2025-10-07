@@ -123,15 +123,15 @@ const AccessibilityAssistant = () => {
       {isOpen && (
         <div
           id="accessibility-panel"
-          className="fixed bottom-20 right-4 z-40 bg-white dark:bg-gray-900 border-4 border-indigo-600 dark:border-yellow-400 rounded-xl shadow-2xl p-6 w-96 max-w-[calc(100vw-2rem)]"
+          className="fixed bottom-20 right-4 z-40 bg-white dark:bg-gray-900 border-2 border-indigo-600 dark:border-yellow-400 rounded-lg shadow-xl p-4 w-80 max-w-[calc(100vw-2rem)]"
           role="dialog"
           aria-labelledby="accessibility-title"
           aria-modal="true"
           onKeyDown={handleKeyDown}
           style={{
             fontFamily: 'system-ui, -apple-system, sans-serif', // Dyslexia-friendly font
-            lineHeight: '1.6',
-            letterSpacing: '0.02em'
+            lineHeight: '1.5',
+            letterSpacing: '0.01em'
           }}
         >
           {/* Header */}
