@@ -202,9 +202,14 @@ const AccessibilityAssistant = () => {
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm" role="img" aria-label="Text size">📝</span>
-                  <span className="text-xs font-medium text-gray-900 dark:text-white">
-                    Text Size
-                  </span>
+                  <div>
+                    <span className="text-xs font-medium text-gray-900 dark:text-white block">
+                      Text Size
+                    </span>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      Low vision, dyslexia
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="grid grid-cols-4 gap-1">
@@ -224,7 +229,7 @@ const AccessibilityAssistant = () => {
                         : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
                     }`}
                     aria-pressed={accessibility.textSize === size.value}
-                    title={`${size.label} text size`}
+                    title={`${size.label} text size for low vision and dyslexia`}
                   >
                     {size.label}
                   </button>
