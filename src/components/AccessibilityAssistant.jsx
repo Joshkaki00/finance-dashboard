@@ -375,17 +375,37 @@ const AccessibilityAssistant = () => {
 
           {/* Keyboard Shortcuts Info */}
           {accessibility.keyboardHelper && (
-            <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-              <h3 className="text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">
-                Keyboard Shortcuts
-              </h3>
-              <ul className="text-xs text-blue-800 dark:text-blue-300 space-y-1">
-                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Tab</kbd> - Navigate forward</li>
-                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Shift+Tab</kbd> - Navigate backward</li>
-                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Enter/Space</kbd> - Activate buttons</li>
-                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Esc</kbd> - Close dialogs</li>
-                <li><kbd className="px-1 bg-blue-200 dark:bg-blue-800 rounded">Arrow keys</kbd> - Navigate lists</li>
-              </ul>
+            <div className="mt-6 p-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl border-2 border-indigo-200 dark:border-indigo-700">
+              <div className="flex items-center space-x-2 mb-4">
+                <span className="text-2xl" role="img" aria-label="Keyboard shortcuts">⌨️</span>
+                <h3 className="text-lg font-bold text-indigo-900 dark:text-indigo-200">
+                  Keyboard Shortcuts Guide
+                </h3>
+              </div>
+              <div className="grid grid-cols-1 gap-3">
+                {[
+                  { key: 'Tab', description: 'Navigate forward through elements', icon: '➡️' },
+                  { key: 'Shift+Tab', description: 'Navigate backward through elements', icon: '⬅️' },
+                  { key: 'Enter/Space', description: 'Activate buttons and links', icon: '✅' },
+                  { key: 'Esc', description: 'Close dialogs and menus', icon: '❌' },
+                  { key: 'Arrow keys', description: 'Navigate lists and menus', icon: '🔄' }
+                ].map((shortcut, index) => (
+                  <div key={index} className="flex items-center space-x-3 p-2 bg-white dark:bg-gray-800 rounded-lg border border-indigo-200 dark:border-indigo-600">
+                    <span className="text-lg" role="img" aria-hidden="true">{shortcut.icon}</span>
+                    <kbd className="px-3 py-1 bg-indigo-600 text-white text-sm font-bold rounded-md border-2 border-indigo-700 shadow-sm min-w-[80px] text-center">
+                      {shortcut.key}
+                    </kbd>
+                    <span className="text-sm text-gray-700 dark:text-gray-300 font-medium flex-1">
+                      {shortcut.description}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg border border-yellow-300 dark:border-yellow-600">
+                <p className="text-sm text-yellow-800 dark:text-yellow-200 font-medium">
+                  💡 <strong>Tip:</strong> Use these shortcuts to navigate without a mouse. Focus indicators will show your current position.
+                </p>
+              </div>
             </div>
           )}
         </div>
