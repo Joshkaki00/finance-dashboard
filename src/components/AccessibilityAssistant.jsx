@@ -280,73 +280,87 @@ const AccessibilityAssistant = () => {
             </div>
 
             {/* Enhanced Focus */}
-            <div className="flex items-center justify-between p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
-              <div className="flex items-center space-x-2">
-                <span className="text-sm" role="img" aria-label="Enhanced focus">🎯</span>
-                <label 
-                  htmlFor="enhanced-focus-toggle"
-                  className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer"
-                >
-                  Enhanced Focus
-                </label>
-              </div>
-              <button
-                id="enhanced-focus-toggle"
-                type="button"
-                onClick={toggleEnhancedFocus}
-                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
-                  accessibility.enhancedFocus 
-                    ? 'bg-green-600' 
-                    : 'bg-gray-300 dark:bg-gray-600'
-                }`}
-                role="switch"
-                aria-checked={accessibility.enhancedFocus}
-                title="Larger focus indicators for better visibility"
-              >
-                <span
-                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
-                    accessibility.enhancedFocus ? 'translate-x-5' : 'translate-x-1'
+            <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm" role="img" aria-label="Enhanced focus">🎯</span>
+                  <div>
+                    <label 
+                      htmlFor="enhanced-focus-toggle"
+                      className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer block"
+                    >
+                      Enhanced Focus
+                    </label>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      Low vision, motor impairments
+                    </div>
+                  </div>
+                </div>
+                <button
+                  id="enhanced-focus-toggle"
+                  type="button"
+                  onClick={toggleEnhancedFocus}
+                  className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
+                    accessibility.enhancedFocus 
+                      ? 'bg-green-600' 
+                      : 'bg-gray-300 dark:bg-gray-600'
                   }`}
-                />
-                <span className="sr-only">
-                  {accessibility.enhancedFocus ? 'Disable' : 'Enable'} enhanced focus indicators
-                </span>
-              </button>
+                  role="switch"
+                  aria-checked={accessibility.enhancedFocus}
+                  title="Larger focus indicators for low vision and motor impairments"
+                >
+                  <span
+                    className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
+                      accessibility.enhancedFocus ? 'translate-x-5' : 'translate-x-1'
+                    }`}
+                  />
+                  <span className="sr-only">
+                    {accessibility.enhancedFocus ? 'Disable' : 'Enable'} enhanced focus indicators
+                  </span>
+                </button>
+              </div>
             </div>
 
             {/* Keyboard Helper */}
-            <div className="flex items-center justify-between p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
-              <div className="flex items-center space-x-2">
-                <span className="text-sm" role="img" aria-label="Keyboard helper">⌨️</span>
-                <label 
-                  htmlFor="keyboard-helper-toggle"
-                  className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer"
-                >
-                  Keyboard Helper
-                </label>
-              </div>
-              <button
-                id="keyboard-helper-toggle"
-                type="button"
-                onClick={toggleKeyboardHelper}
-                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
-                  accessibility.keyboardHelper 
-                    ? 'bg-green-600' 
-                    : 'bg-gray-300 dark:bg-gray-600'
-                }`}
-                role="switch"
-                aria-checked={accessibility.keyboardHelper}
-                title="Shows keyboard shortcuts and navigation hints"
-              >
-                <span
-                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
-                    accessibility.keyboardHelper ? 'translate-x-5' : 'translate-x-1'
+            <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm" role="img" aria-label="Keyboard helper">⌨️</span>
+                  <div>
+                    <label 
+                      htmlFor="keyboard-helper-toggle"
+                      className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer block"
+                    >
+                      Keyboard Helper
+                    </label>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      Motor impairments, screen readers
+                    </div>
+                  </div>
+                </div>
+                <button
+                  id="keyboard-helper-toggle"
+                  type="button"
+                  onClick={toggleKeyboardHelper}
+                  className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
+                    accessibility.keyboardHelper 
+                      ? 'bg-green-600' 
+                      : 'bg-gray-300 dark:bg-gray-600'
                   }`}
-                />
-                <span className="sr-only">
-                  {accessibility.keyboardHelper ? 'Disable' : 'Enable'} keyboard navigation helper
-                </span>
-              </button>
+                  role="switch"
+                  aria-checked={accessibility.keyboardHelper}
+                  title="Shows keyboard shortcuts for motor impairments and screen reader users"
+                >
+                  <span
+                    className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
+                      accessibility.keyboardHelper ? 'translate-x-5' : 'translate-x-1'
+                    }`}
+                  />
+                  <span className="sr-only">
+                    {accessibility.keyboardHelper ? 'Disable' : 'Enable'} keyboard navigation helper
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
 
