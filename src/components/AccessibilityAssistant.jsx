@@ -123,28 +123,40 @@ const AccessibilityAssistant = () => {
       {isOpen && (
         <div
           id="accessibility-panel"
-          className="fixed bottom-20 right-4 z-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl p-6 w-80 max-w-[calc(100vw-2rem)]"
+          className="fixed bottom-20 right-4 z-40 bg-white dark:bg-gray-900 border-4 border-indigo-600 dark:border-yellow-400 rounded-xl shadow-2xl p-6 w-96 max-w-[calc(100vw-2rem)]"
           role="dialog"
           aria-labelledby="accessibility-title"
           aria-modal="true"
           onKeyDown={handleKeyDown}
+          style={{
+            fontFamily: 'system-ui, -apple-system, sans-serif', // Dyslexia-friendly font
+            lineHeight: '1.6',
+            letterSpacing: '0.02em'
+          }}
         >
           {/* Header */}
-          <div className="flex items-center justify-between mb-4">
-            <h2 
-              id="accessibility-title"
-              className="text-lg font-semibold text-gray-900 dark:text-white"
-            >
-              Accessibility Options
-            </h2>
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 
+                id="accessibility-title"
+                className="text-xl font-bold text-gray-900 dark:text-white mb-1"
+                style={{ fontWeight: '700' }}
+              >
+                🛠️ Accessibility Support
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                Settings for visual, motor, and cognitive disabilities
+              </p>
+            </div>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="Close accessibility options"
+              className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white p-2 rounded-lg border-2 border-transparent hover:border-gray-300 focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:border-indigo-500 transition-all"
+              aria-label="Close accessibility support panel"
+              style={{ minWidth: '40px', minHeight: '40px' }}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
