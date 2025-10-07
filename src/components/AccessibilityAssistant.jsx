@@ -161,24 +161,24 @@ const AccessibilityAssistant = () => {
           </div>
 
           {/* Options */}
-          <div className="space-y-6">
+          <div className="space-y-3">
             {/* High Contrast */}
-            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-2 border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-3">
-                  <span className="text-2xl" role="img" aria-label="High contrast icon">🔲</span>
+            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <span className="text-lg" role="img" aria-label="High contrast icon">🔲</span>
                   <label 
                     htmlFor="high-contrast-toggle"
-                    className="text-base font-semibold text-gray-900 dark:text-white cursor-pointer"
+                    className="text-sm font-semibold text-gray-900 dark:text-white cursor-pointer"
                   >
-                    High Contrast Mode
+                    High Contrast
                   </label>
                 </div>
                 <button
                   id="high-contrast-toggle"
                   type="button"
                   onClick={toggleHighContrast}
-                  className={`relative inline-flex h-8 w-14 items-center rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-offset-2 border-2 ${
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 border ${
                     accessibility.highContrast 
                       ? 'bg-green-600 border-green-700' 
                       : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
@@ -186,11 +186,10 @@ const AccessibilityAssistant = () => {
                   role="switch"
                   aria-checked={accessibility.highContrast}
                   aria-describedby="high-contrast-description"
-                  style={{ minWidth: '56px', minHeight: '32px' }}
                 >
                   <span
-                    className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform duration-300 shadow-lg ${
-                      accessibility.highContrast ? 'translate-x-7' : 'translate-x-1'
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 shadow ${
+                      accessibility.highContrast ? 'translate-x-6' : 'translate-x-1'
                     }`}
                   />
                   <span className="sr-only">
@@ -198,9 +197,8 @@ const AccessibilityAssistant = () => {
                   </span>
                 </button>
               </div>
-              <p id="high-contrast-description" className="text-sm text-gray-700 dark:text-gray-300 ml-11">
-                <strong>For:</strong> Low vision, color blindness, light sensitivity<br/>
-                <strong>Effect:</strong> Increases color contrast and makes text more visible
+              <p id="high-contrast-description" className="text-xs text-gray-600 dark:text-gray-400 mt-1 ml-7">
+                Better visibility for low vision & color blindness
               </p>
             </div>
 
