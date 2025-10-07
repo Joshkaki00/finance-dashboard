@@ -333,27 +333,23 @@ const AccessibilityAssistant = () => {
 
           {/* Keyboard Shortcuts Info */}
           {accessibility.keyboardHelper && (
-            <div className="mt-4 p-3 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg border border-indigo-200 dark:border-indigo-700">
-              <div className="flex items-center space-x-2 mb-3">
-                <span className="text-lg" role="img" aria-label="Keyboard shortcuts">⌨️</span>
-                <h3 className="text-sm font-bold text-indigo-900 dark:text-indigo-200">
-                  Keyboard Shortcuts
-                </h3>
+            <div className="mt-2 p-2 bg-indigo-50 dark:bg-indigo-900/30 rounded border border-indigo-200 dark:border-indigo-700">
+              <div className="text-xs font-medium text-indigo-900 dark:text-indigo-200 mb-2">
+                ⌨️ Shortcuts
               </div>
-              <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-1 text-xs">
                 {[
-                  { key: 'Tab', description: 'Navigate forward', icon: '➡️' },
-                  { key: 'Shift+Tab', description: 'Navigate backward', icon: '⬅️' },
-                  { key: 'Enter/Space', description: 'Activate buttons', icon: '✅' },
-                  { key: 'Esc', description: 'Close dialogs', icon: '❌' }
+                  { key: 'Tab', desc: 'Next' },
+                  { key: 'Esc', desc: 'Close' },
+                  { key: 'Enter', desc: 'Select' },
+                  { key: 'Shift+Tab', desc: 'Previous' }
                 ].map((shortcut) => (
-                  <div key={shortcut.key} className="flex items-center space-x-2 text-xs">
-                    <span className="text-sm" role="img" aria-hidden="true">{shortcut.icon}</span>
-                    <kbd className="px-2 py-1 bg-indigo-600 text-white font-bold rounded text-xs min-w-[60px] text-center">
+                  <div key={shortcut.key} className="flex items-center space-x-1">
+                    <kbd className="px-1 py-0.5 bg-indigo-600 text-white font-bold rounded text-xs">
                       {shortcut.key}
                     </kbd>
-                    <span className="text-gray-700 dark:text-gray-300 flex-1">
-                      {shortcut.description}
+                    <span className="text-gray-700 dark:text-gray-300 text-xs">
+                      {shortcut.desc}
                     </span>
                   </div>
                 ))}
