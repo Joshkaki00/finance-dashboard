@@ -82,26 +82,41 @@ const AccessibilityAssistant = () => {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 right-4 z-50 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300"
-        aria-label="Open accessibility options"
+        className="fixed bottom-4 right-4 z-50 bg-indigo-700 hover:bg-indigo-800 text-white p-4 rounded-full shadow-2xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-offset-4 border-2 border-white hover:scale-110 active:scale-95"
+        aria-label="Open accessibility settings and assistance options for visual, motor, and cognitive disabilities"
         aria-expanded={isOpen}
         aria-controls="accessibility-panel"
-        title="Accessibility Options"
+        title="Accessibility & Disability Support Options - Click to open settings for visual impairments, dyslexia, color blindness, and more"
+        style={{
+          minWidth: '56px',
+          minHeight: '56px',
+          fontSize: '14px',
+          fontWeight: 'bold'
+        }}
       >
+        {/* Universal Accessibility Icon - Person with arms spread in a circle */}
         <svg 
-          className="w-6 h-6" 
-          fill="none" 
-          stroke="currentColor" 
+          className="w-7 h-7" 
+          fill="currentColor" 
           viewBox="0 0 24 24"
           aria-hidden="true"
+          role="img"
+          aria-label="Universal accessibility symbol"
         >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth={2} 
-            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" 
-          />
+          {/* Head */}
+          <circle cx="12" cy="5" r="2" />
+          {/* Body and arms spread wide (universal accessibility symbol) */}
+          <path d="M12 8c-1.5 0-3 .5-4 1.5L6.5 11l1.5 1.5L9.5 11c.5-.5 1.5-1 2.5-1s2 .5 2.5 1l1.5 1.5L17.5 11l-1.5-1.5C15 8.5 13.5 8 12 8z"/>
+          {/* Legs */}
+          <path d="M10 13v7h1.5v-7h1v7H14v-7c0-.5-.5-1-1-1h-2c-.5 0-1 .5-1 1z"/>
+          {/* Outer circle representing inclusion */}
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.7"/>
         </svg>
+        
+        {/* Text label for screen readers and dyslexic users */}
+        <span className="sr-only">
+          Accessibility Support - Visual disabilities, dyslexia, color blindness, motor impairments
+        </span>
       </button>
 
       {/* Accessibility Panel */}
