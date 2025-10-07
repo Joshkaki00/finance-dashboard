@@ -82,19 +82,19 @@ const AccessibilityAssistant = () => {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 right-4 z-50 bg-indigo-700 hover:bg-indigo-800 text-white p-2 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 border border-white hover:scale-105 active:scale-95"
+        className="fixed bottom-4 right-4 z-50 bg-indigo-700 hover:bg-indigo-800 text-white p-3 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 border border-white hover:scale-105 active:scale-95"
         aria-label="Accessibility settings"
         aria-expanded={isOpen}
         aria-controls="accessibility-panel"
         title="Accessibility Support"
         style={{
-          minWidth: '40px',
-          minHeight: '40px'
+          minWidth: '52px',
+          minHeight: '52px'
         }}
       >
         {/* Universal Accessibility Icon - Person with arms spread in a circle */}
         <svg 
-          className="w-5 h-5" 
+          className="w-6 h-6" 
           fill="currentColor" 
           viewBox="0 0 24 24"
           aria-hidden="true"
