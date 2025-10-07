@@ -133,26 +133,21 @@ const AccessibilityAssistant = () => {
           }}
         >
           {/* Header */}
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 
-                id="accessibility-title"
-                className="text-lg font-bold text-gray-900 dark:text-white mb-1"
-              >
-                🛠️ Accessibility
-              </h2>
-              <p className="text-xs text-gray-600 dark:text-gray-300">
-                Visual & motor support
-              </p>
-            </div>
+          <div className="flex items-center justify-between mb-3">
+            <h2 
+              id="accessibility-title"
+              className="text-sm font-bold text-gray-900 dark:text-white"
+            >
+              🛠️ Accessibility
+            </h2>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
-              aria-label="Close accessibility panel"
-              style={{ minWidth: '32px', minHeight: '32px' }}
+              className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-yellow-400"
+              aria-label="Close"
+              style={{ minWidth: '24px', minHeight: '24px' }}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
