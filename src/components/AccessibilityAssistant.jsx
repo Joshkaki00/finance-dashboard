@@ -204,9 +204,9 @@ const AccessibilityAssistant = () => {
             <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700">
               <div className="flex items-center space-x-2 mb-2">
                 <span className="text-lg" role="img" aria-label="Text size icon">📝</span>
-                <label className="text-sm font-semibold text-gray-900 dark:text-white">
+                <span className="text-sm font-semibold text-gray-900 dark:text-white">
                   Text Size
-                </label>
+                </span>
               </div>
               <div className="grid grid-cols-4 gap-2">
                 {[
