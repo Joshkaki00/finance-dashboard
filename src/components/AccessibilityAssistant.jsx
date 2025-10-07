@@ -372,8 +372,8 @@ const AccessibilityAssistant = () => {
                   { key: 'Shift+Tab', description: 'Navigate backward', icon: '⬅️' },
                   { key: 'Enter/Space', description: 'Activate buttons', icon: '✅' },
                   { key: 'Esc', description: 'Close dialogs', icon: '❌' }
-                ].map((shortcut, index) => (
-                  <div key={index} className="flex items-center space-x-2 text-xs">
+                ].map((shortcut) => (
+                  <div key={shortcut.key} className="flex items-center space-x-2 text-xs">
                     <span className="text-sm" role="img" aria-hidden="true">{shortcut.icon}</span>
                     <kbd className="px-2 py-1 bg-indigo-600 text-white font-bold rounded text-xs min-w-[60px] text-center">
                       {shortcut.key}
