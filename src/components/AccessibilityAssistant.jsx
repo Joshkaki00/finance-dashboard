@@ -247,94 +247,130 @@ const AccessibilityAssistant = () => {
             </div>
 
             {/* Reduced Motion */}
-            <div className="flex items-center justify-between">
-              <label 
-                htmlFor="reduced-motion-toggle"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Reduce Motion
-              </label>
-              <button
-                id="reduced-motion-toggle"
-                type="button"
-                onClick={toggleReducedMotion}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                  accessibility.reducedMotion ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
-                }`}
-                role="switch"
-                aria-checked={accessibility.reducedMotion}
-                aria-describedby="reduced-motion-description"
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                    accessibility.reducedMotion ? 'translate-x-6' : 'translate-x-1'
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-2 border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-3">
+                  <span className="text-2xl" role="img" aria-label="Reduced motion icon">🐌</span>
+                  <label 
+                    htmlFor="reduced-motion-toggle"
+                    className="text-base font-semibold text-gray-900 dark:text-white cursor-pointer"
+                  >
+                    Reduce Motion
+                  </label>
+                </div>
+                <button
+                  id="reduced-motion-toggle"
+                  type="button"
+                  onClick={toggleReducedMotion}
+                  className={`relative inline-flex h-8 w-14 items-center rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-offset-2 border-2 ${
+                    accessibility.reducedMotion 
+                      ? 'bg-green-600 border-green-700' 
+                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
                   }`}
-                />
-              </button>
+                  role="switch"
+                  aria-checked={accessibility.reducedMotion}
+                  aria-describedby="reduced-motion-description"
+                  style={{ minWidth: '56px', minHeight: '32px' }}
+                >
+                  <span
+                    className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform duration-300 shadow-lg ${
+                      accessibility.reducedMotion ? 'translate-x-7' : 'translate-x-1'
+                    }`}
+                  />
+                  <span className="sr-only">
+                    {accessibility.reducedMotion ? 'Disable' : 'Enable'} reduced motion
+                  </span>
+                </button>
+              </div>
+              <p id="reduced-motion-description" className="text-sm text-gray-700 dark:text-gray-300 ml-11">
+                <strong>For:</strong> Vestibular disorders, motion sensitivity, ADHD<br/>
+                <strong>Effect:</strong> Minimizes animations and moving elements
+              </p>
             </div>
-            <p id="reduced-motion-description" className="text-xs text-gray-500 dark:text-gray-400">
-              Minimizes animations and transitions
-            </p>
 
             {/* Enhanced Focus */}
-            <div className="flex items-center justify-between">
-              <label 
-                htmlFor="enhanced-focus-toggle"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Enhanced Focus
-              </label>
-              <button
-                id="enhanced-focus-toggle"
-                type="button"
-                onClick={toggleEnhancedFocus}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                  accessibility.enhancedFocus ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
-                }`}
-                role="switch"
-                aria-checked={accessibility.enhancedFocus}
-                aria-describedby="enhanced-focus-description"
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                    accessibility.enhancedFocus ? 'translate-x-6' : 'translate-x-1'
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-2 border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-3">
+                  <span className="text-2xl" role="img" aria-label="Enhanced focus icon">🎯</span>
+                  <label 
+                    htmlFor="enhanced-focus-toggle"
+                    className="text-base font-semibold text-gray-900 dark:text-white cursor-pointer"
+                  >
+                    Enhanced Focus
+                  </label>
+                </div>
+                <button
+                  id="enhanced-focus-toggle"
+                  type="button"
+                  onClick={toggleEnhancedFocus}
+                  className={`relative inline-flex h-8 w-14 items-center rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-offset-2 border-2 ${
+                    accessibility.enhancedFocus 
+                      ? 'bg-green-600 border-green-700' 
+                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
                   }`}
-                />
-              </button>
+                  role="switch"
+                  aria-checked={accessibility.enhancedFocus}
+                  aria-describedby="enhanced-focus-description"
+                  style={{ minWidth: '56px', minHeight: '32px' }}
+                >
+                  <span
+                    className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform duration-300 shadow-lg ${
+                      accessibility.enhancedFocus ? 'translate-x-7' : 'translate-x-1'
+                    }`}
+                  />
+                  <span className="sr-only">
+                    {accessibility.enhancedFocus ? 'Disable' : 'Enable'} enhanced focus indicators
+                  </span>
+                </button>
+              </div>
+              <p id="enhanced-focus-description" className="text-sm text-gray-700 dark:text-gray-300 ml-11">
+                <strong>For:</strong> Low vision, keyboard navigation, motor impairments<br/>
+                <strong>Effect:</strong> Makes focus indicators larger and more visible
+              </p>
             </div>
-            <p id="enhanced-focus-description" className="text-xs text-gray-500 dark:text-gray-400">
-              Makes focus indicators more visible
-            </p>
 
             {/* Keyboard Helper */}
-            <div className="flex items-center justify-between">
-              <label 
-                htmlFor="keyboard-helper-toggle"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Keyboard Navigation Helper
-              </label>
-              <button
-                id="keyboard-helper-toggle"
-                type="button"
-                onClick={toggleKeyboardHelper}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                  accessibility.keyboardHelper ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'
-                }`}
-                role="switch"
-                aria-checked={accessibility.keyboardHelper}
-                aria-describedby="keyboard-helper-description"
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                    accessibility.keyboardHelper ? 'translate-x-6' : 'translate-x-1'
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-2 border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-3">
+                  <span className="text-2xl" role="img" aria-label="Keyboard helper icon">⌨️</span>
+                  <label 
+                    htmlFor="keyboard-helper-toggle"
+                    className="text-base font-semibold text-gray-900 dark:text-white cursor-pointer"
+                  >
+                    Keyboard Navigation Helper
+                  </label>
+                </div>
+                <button
+                  id="keyboard-helper-toggle"
+                  type="button"
+                  onClick={toggleKeyboardHelper}
+                  className={`relative inline-flex h-8 w-14 items-center rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-offset-2 border-2 ${
+                    accessibility.keyboardHelper 
+                      ? 'bg-green-600 border-green-700' 
+                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
                   }`}
-                />
-              </button>
+                  role="switch"
+                  aria-checked={accessibility.keyboardHelper}
+                  aria-describedby="keyboard-helper-description"
+                  style={{ minWidth: '56px', minHeight: '32px' }}
+                >
+                  <span
+                    className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform duration-300 shadow-lg ${
+                      accessibility.keyboardHelper ? 'translate-x-7' : 'translate-x-1'
+                    }`}
+                  />
+                  <span className="sr-only">
+                    {accessibility.keyboardHelper ? 'Disable' : 'Enable'} keyboard navigation helper
+                  </span>
+                </button>
+              </div>
+              <p id="keyboard-helper-description" className="text-sm text-gray-700 dark:text-gray-300 ml-11">
+                <strong>For:</strong> Motor impairments, screen reader users, keyboard-only navigation<br/>
+                <strong>Effect:</strong> Shows keyboard shortcuts and navigation hints
+              </p>
             </div>
-            <p id="keyboard-helper-description" className="text-xs text-gray-500 dark:text-gray-400">
-              Shows keyboard shortcuts and navigation hints
-            </p>
           </div>
 
           {/* Keyboard Shortcuts Info */}
