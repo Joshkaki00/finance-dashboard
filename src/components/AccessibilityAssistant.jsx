@@ -82,14 +82,14 @@ const AccessibilityAssistant = () => {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 right-4 z-50 bg-indigo-700 hover:bg-indigo-800 text-white p-3 rounded-full shadow-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-offset-2 border-2 border-white hover:scale-105 active:scale-95"
-        aria-label="Open accessibility settings for visual, motor, and cognitive disabilities"
+        className="fixed bottom-4 right-4 z-50 bg-indigo-700 hover:bg-indigo-800 text-white p-2 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 border border-white hover:scale-105 active:scale-95"
+        aria-label="Accessibility settings"
         aria-expanded={isOpen}
         aria-controls="accessibility-panel"
-        title="Accessibility Support - Visual impairments, dyslexia, color blindness, motor disabilities"
+        title="Accessibility Support"
         style={{
-          minWidth: '48px',
-          minHeight: '48px'
+          minWidth: '40px',
+          minHeight: '40px'
         }}
       >
         {/* Universal Accessibility Icon - Person with arms spread in a circle */}
