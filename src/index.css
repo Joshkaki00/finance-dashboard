@@ -269,3 +269,108 @@ body {
 .skip-to-content:focus {
   top: 6px;
 }
+
+/* Enhanced keyboard helper for better visibility */
+.keyboard-helper [tabindex]:focus::after,
+.keyboard-helper button:focus::after,
+.keyboard-helper a:focus::after,
+.keyboard-helper input:focus::after,
+.keyboard-helper select:focus::after,
+.keyboard-helper textarea:focus::after {
+  top: -35px !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  border: 2px solid var(--focus-ring-color) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dyslexia-friendly improvements */
+.dyslexia-friendly {
+  font-family: var(--dyslexia-font) !important;
+  line-height: 1.8 !important;
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+}
+
+.dyslexia-friendly p, 
+.dyslexia-friendly span, 
+.dyslexia-friendly div {
+  text-align: left !important;
+  hyphens: none !important;
+}
+
+/* Enhanced focus with yellow for better visibility */
+.enhanced-focus *:focus {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color) !important;
+  outline-offset: var(--focus-ring-offset) !important;
+  box-shadow: 0 0 0 8px rgba(234, 179, 8, 0.3) !important; /* Yellow glow */
+}
+
+/* Better button contrast for color blindness */
+.accessibility-button {
+  background: var(--cb-primary) !important;
+  color: white !important;
+  border: 3px solid var(--focus-ring-color) !important;
+}
+
+.accessibility-button:hover {
+  background: var(--cb-info) !important;
+  transform: scale(1.1) !important;
+}
+
+.accessibility-button:focus {
+  outline: 4px solid var(--focus-ring-color) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 8px rgba(234, 179, 8, 0.4) !important;
+}
+
+/* High contrast improvements for severe visual impairments */
+.high-contrast .accessibility-button {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 4px solid #ffff00 !important;
+}
+
+.high-contrast .accessibility-button:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 4px solid #ffff00 !important;
+}
+
+/* Pattern-based indicators for color-blind users */
+.pattern-success::before {
+  content: "✓ ";
+  color: var(--cb-success);
+  font-weight: bold;
+}
+
+.pattern-warning::before {
+  content: "⚠ ";
+  color: var(--cb-warning);
+  font-weight: bold;
+}
+
+.pattern-error::before {
+  content: "✗ ";
+  color: var(--cb-error);
+  font-weight: bold;
+}
+
+/* Large touch targets for motor impairments */
+.large-touch-target {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 12px !important;
+}
+
+/* Reduce visual clutter for cognitive disabilities */
+.simplified-ui {
+  border-radius: 8px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.simplified-ui:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
