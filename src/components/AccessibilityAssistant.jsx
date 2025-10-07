@@ -154,45 +154,40 @@ const AccessibilityAssistant = () => {
           </div>
 
           {/* Options */}
-          <div className="space-y-3">
+          <div className="space-y-2">
             {/* High Contrast */}
-            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="text-lg" role="img" aria-label="High contrast icon">🔲</span>
-                  <label 
-                    htmlFor="high-contrast-toggle"
-                    className="text-sm font-semibold text-gray-900 dark:text-white cursor-pointer"
-                  >
-                    High Contrast
-                  </label>
-                </div>
-                <button
-                  id="high-contrast-toggle"
-                  type="button"
-                  onClick={toggleHighContrast}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 border ${
-                    accessibility.highContrast 
-                      ? 'bg-green-600 border-green-700' 
-                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
-                  }`}
-                  role="switch"
-                  aria-checked={accessibility.highContrast}
-                  aria-describedby="high-contrast-description"
+            <div className="flex items-center justify-between p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm" role="img" aria-label="High contrast">🔲</span>
+                <label 
+                  htmlFor="high-contrast-toggle"
+                  className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer"
                 >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 shadow ${
-                      accessibility.highContrast ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
-                  <span className="sr-only">
-                    {accessibility.highContrast ? 'Disable' : 'Enable'} high contrast mode
-                  </span>
-                </button>
+                  High Contrast
+                </label>
               </div>
-              <p id="high-contrast-description" className="text-xs text-gray-600 dark:text-gray-400 mt-1 ml-7">
-                Better visibility for low vision & color blindness
-              </p>
+              <button
+                id="high-contrast-toggle"
+                type="button"
+                onClick={toggleHighContrast}
+                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
+                  accessibility.highContrast 
+                    ? 'bg-green-600' 
+                    : 'bg-gray-300 dark:bg-gray-600'
+                }`}
+                role="switch"
+                aria-checked={accessibility.highContrast}
+                title="Better visibility for low vision & color blindness"
+              >
+                <span
+                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
+                    accessibility.highContrast ? 'translate-x-5' : 'translate-x-1'
+                  }`}
+                />
+                <span className="sr-only">
+                  {accessibility.highContrast ? 'Disable' : 'Enable'} high contrast mode
+                </span>
+              </button>
             </div>
 
             {/* Text Size */}
