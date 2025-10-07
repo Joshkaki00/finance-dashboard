@@ -238,38 +238,45 @@ const AccessibilityAssistant = () => {
             </div>
 
             {/* Reduced Motion */}
-            <div className="flex items-center justify-between p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
-              <div className="flex items-center space-x-2">
-                <span className="text-sm" role="img" aria-label="Reduced motion">🐌</span>
-                <label 
-                  htmlFor="reduced-motion-toggle"
-                  className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer"
-                >
-                  Reduce Motion
-                </label>
-              </div>
-              <button
-                id="reduced-motion-toggle"
-                type="button"
-                onClick={toggleReducedMotion}
-                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
-                  accessibility.reducedMotion 
-                    ? 'bg-green-600' 
-                    : 'bg-gray-300 dark:bg-gray-600'
-                }`}
-                role="switch"
-                aria-checked={accessibility.reducedMotion}
-                title="Minimizes animations for motion sensitivity"
-              >
-                <span
-                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
-                    accessibility.reducedMotion ? 'translate-x-5' : 'translate-x-1'
+            <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm" role="img" aria-label="Reduced motion">🐌</span>
+                  <div>
+                    <label 
+                      htmlFor="reduced-motion-toggle"
+                      className="text-xs font-medium text-gray-900 dark:text-white cursor-pointer block"
+                    >
+                      Reduce Motion
+                    </label>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      Vestibular disorders, ADHD
+                    </div>
+                  </div>
+                </div>
+                <button
+                  id="reduced-motion-toggle"
+                  type="button"
+                  onClick={toggleReducedMotion}
+                  className={`relative inline-flex h-5 w-9 items-center rounded-full transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
+                    accessibility.reducedMotion 
+                      ? 'bg-green-600' 
+                      : 'bg-gray-300 dark:bg-gray-600'
                   }`}
-                />
-                <span className="sr-only">
-                  {accessibility.reducedMotion ? 'Disable' : 'Enable'} reduced motion
-                </span>
-              </button>
+                  role="switch"
+                  aria-checked={accessibility.reducedMotion}
+                  title="Minimizes animations for vestibular disorders and ADHD"
+                >
+                  <span
+                    className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform shadow-sm ${
+                      accessibility.reducedMotion ? 'translate-x-5' : 'translate-x-1'
+                    }`}
+                  />
+                  <span className="sr-only">
+                    {accessibility.reducedMotion ? 'Disable' : 'Enable'} reduced motion
+                  </span>
+                </button>
+              </div>
             </div>
 
             {/* Enhanced Focus */}
