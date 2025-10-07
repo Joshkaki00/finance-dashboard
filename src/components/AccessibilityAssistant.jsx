@@ -191,36 +191,35 @@ const AccessibilityAssistant = () => {
             </div>
 
             {/* Text Size */}
-            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center space-x-2 mb-2">
-                <span className="text-lg" role="img" aria-label="Text size icon">📝</span>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                  Text Size
-                </span>
+            <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm" role="img" aria-label="Text size">📝</span>
+                  <span className="text-xs font-medium text-gray-900 dark:text-white">
+                    Text Size
+                  </span>
+                </div>
               </div>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 gap-1">
                 {[
-                  { value: '1', label: 'S', description: '100%' },
-                  { value: '1.1', label: 'M', description: '110%' },
-                  { value: '1.25', label: 'L', description: '125%' },
-                  { value: '1.5', label: 'XL', description: '150%' }
+                  { value: '1', label: 'S' },
+                  { value: '1.1', label: 'M' },
+                  { value: '1.25', label: 'L' },
+                  { value: '1.5', label: 'XL' }
                 ].map((size) => (
                   <button
                     key={size.value}
                     type="button"
                     onClick={() => handleTextSizeChange(size.value)}
-                    className={`p-2 text-xs rounded border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 ${
+                    className={`p-1 text-xs rounded transition-all focus:outline-none focus:ring-1 focus:ring-yellow-400 ${
                       accessibility.textSize === size.value
-                        ? 'bg-green-600 text-white border-green-700'
-                        : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
+                        ? 'bg-green-600 text-white'
+                        : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
                     }`}
                     aria-pressed={accessibility.textSize === size.value}
-                    title={`${size.description} text size`}
+                    title={`${size.label} text size`}
                   >
-                    <div className="flex flex-col items-center">
-                      <span className="font-bold">{size.label}</span>
-                      <span className="text-xs opacity-75">{size.description}</span>
-                    </div>
+                    {size.label}
                   </button>
                 ))}
               </div>
