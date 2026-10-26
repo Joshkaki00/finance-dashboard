@@ -77,7 +77,7 @@ manualChunks: (id) => {
 <link rel="dns-prefetch" href="https://api.api-ninjas.com">
 
 <!-- Module preloading -->
-<link rel="modulepreload" href="/src/main.jsx">
+<link rel="modulepreload" href="/src/main.tsx">
 ```
 
 #### **4. Critical CSS Inlining**

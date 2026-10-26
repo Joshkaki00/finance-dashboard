@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { deleteTransaction } from '../store/transactionsSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import type { TransactionType } from '../types';
 
 const TransactionList = () => {
-  const dispatch = useDispatch();
-  const transactions = useSelector(state => state.transactions.transactions);
-  const [filter, setFilter] = useState('all'); // 'all', 'income', 'expense'
+  const dispatch = useAppDispatch();
+  const transactions = useAppSelector((state) => state.transactions.transactions);
+  const [filter, setFilter] = useState<'all' | TransactionType>('all');
 
   // Filter transactions based on type
   const filteredTransactions = transactions.filter(transaction => {
@@ -14,13 +15,13 @@ const TransactionList = () => {
   });
 
   // Format date
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   // Format currency
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -28,7 +29,7 @@ const TransactionList = () => {
   };
 
   // Handle transaction deletion
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     if (window.confirm('Are you sure you want to delete this transaction?')) {
       dispatch(deleteTransaction(id));
     }

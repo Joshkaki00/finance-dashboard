@@ -102,7 +102,7 @@ git push -u origin main
 
 3. **Update configuration:**
    - `package.json` `homepage` is `https://joshkaki00.github.io/finance-dashboard/`
-   - Edit `vite.config.js` if your repository name is different
+   - Edit `vite.config.ts` if your repository name is different
 
 The GitHub Action will automatically build and deploy on every push to main.
 
@@ -183,24 +183,24 @@ Test with:
 ```
 src/
 ├── components/           # React components
-│   ├── Dashboard.jsx    # Main dashboard with charts
-│   ├── TransactionForm.jsx
-│   ├── TransactionList.jsx
-│   ├── BudgetForm.jsx
-│   ├── FinancialTips.jsx
-│   ├── MobileNavigation.jsx    # Mobile tab navigation
-│   ├── TabletNavigation.jsx    # Tablet sidebar navigation
-│   ├── MobileDashboard.jsx     # Mobile-optimized dashboard
-│   ├── MobileTransactionForm.jsx
-│   └── TabletTransactionForm.jsx
+│   ├── Dashboard.tsx    # Main dashboard with charts
+│   ├── TransactionForm.tsx
+│   ├── TransactionList.tsx
+│   ├── BudgetForm.tsx
+│   ├── FinancialTips.tsx
+│   ├── MobileNavigation.tsx    # Mobile tab navigation
+│   ├── TabletNavigation.tsx    # Tablet sidebar navigation
+│   ├── MobileDashboard.tsx     # Mobile-optimized dashboard
+│   ├── MobileTransactionForm.tsx
+│   └── TabletTransactionForm.tsx
 ├── store/               # Redux store and slices
-│   ├── index.js
-│   ├── transactionsSlice.js
-│   ├── budgetSlice.js
-│   ├── categoriesSlice.js
-│   └── financialTipsSlice.js
-├── App.jsx             # Main app with responsive layout
-├── main.jsx           # React entry point
+│   ├── index.ts
+│   ├── transactionsSlice.ts
+│   ├── budgetSlice.ts
+│   ├── categoriesSlice.ts
+│   └── financialTipsSlice.ts
+├── App.tsx             # Main app with responsive layout
+├── main.tsx           # React entry point
 ├── index.css          # Global styles with accessibility features
 └── assets/            # Static assets
 ```
@@ -255,8 +255,8 @@ VITE_API_NINJAS_KEY=your_api_key_here
 ### Customization
 
 - **Colors**: Update Tailwind config in `tailwind.config.js`
-- **Categories**: Modify `src/store/categoriesSlice.js`
-- **API Integration**: Update `src/store/financialTipsSlice.js`
+- **Categories**: Modify `src/store/categoriesSlice.ts`
+- **API Integration**: Update `src/store/financialTipsSlice.ts`
 - **Responsive Breakpoints**: Adjust in component CSS classes
 
 ---

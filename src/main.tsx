@@ -10,7 +10,11 @@ import { hydrateTransactions, setExampleUser } from './store/transactionsSlice'
 import { hydrateBudget } from './store/budgetSlice'
 import { hydrateCategories } from './store/categoriesSlice'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Root element #root was not found');
+}
+const root = ReactDOM.createRoot(rootElement);
 document.body.classList.remove('app-loaded');
 
 function renderApp() {
@@ -24,10 +28,10 @@ function renderApp() {
   document.body.classList.add('app-loaded');
   measurePerformance();
   preloadCriticalResources();
-  registerServiceWorker();
+  void registerServiceWorker();
 }
 
-loadFinance()
+void loadFinance()
   .then((data) => {
     store.dispatch(hydrateTransactions(data.transactions));
     store.dispatch(setExampleUser(data.exampleUser));

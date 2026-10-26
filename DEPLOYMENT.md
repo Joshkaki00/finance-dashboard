@@ -7,7 +7,7 @@
 **Edit `package.json`:**
 - `"homepage": "https://joshkaki00.github.io/finance-dashboard/"`
 
-**Edit `vite.config.js` (if needed):**
+**Edit `vite.config.ts` (if needed):**
 - Change `base: '/finance-dashboard/'` if your repository name is different
 
 ### 2. Create GitHub Repository
@@ -66,7 +66,7 @@ npm run deploy
 
 ### Common Issues:
 
-1. **404 Error**: Check that the `base` path in `vite.config.js` matches your repository name
+1. **404 Error**: Check that the `base` path in `vite.config.ts` matches your repository name
 2. **Build Fails**: Run `npm run build` locally to check for errors
 3. **Assets Not Loading**: Ensure the `homepage` in `package.json` is correct
 

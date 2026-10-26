@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { updateBudget } from '../store/budgetSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const BudgetForm = () => {
-  const dispatch = useDispatch();
-  const budget = useSelector(state => state.budget);
-  const categories = useSelector(state => 
-    state.categories.filter(category => category !== 'income')
+  const dispatch = useAppDispatch();
+  const budget = useAppSelector((state) => state.budget);
+  const categories = useAppSelector((state) =>
+    state.categories.filter((category) => category !== 'income')
   );
-  
-  // Create a state object with current budget values
-  const [budgetValues, setBudgetValues] = useState({...budget});
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+
+  const [budgetValues, setBudgetValues] = useState<Record<string, string | number>>({ ...budget });
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
     setBudgetValues({
       ...budgetValues,
       [name]: value
     });
   };
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    // Update each category in the budget
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     Object.entries(budgetValues).forEach(([category, amount]) => {
+      const parsed = typeof amount === 'number' ? amount : Number.parseFloat(amount);
       dispatch(updateBudget({
         category,
-        amount: parseFloat(amount) || 0
+        amount: Number.isFinite(parsed) ? parsed : 0
       }));
     });
     
@@ -35,7 +34,7 @@ const BudgetForm = () => {
   };
   
   // Format currency for display
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

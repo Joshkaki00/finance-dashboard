@@ -1,10 +1,17 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { useAppSelector } from '../store/hooks';
+
+const formatChartValue = (value: unknown) => {
+  const amount = typeof value === 'number' ? value : Number(value);
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(Number.isFinite(amount) ? amount : 0);
+};
 
 const TabletDashboard = () => {
-  const transactions = useSelector(state => state.transactions.transactions);
-  const budget = useSelector(state => state.budget);
+  const transactions = useAppSelector((state) => state.transactions.transactions);
+  const budget = useAppSelector((state) => state.budget);
   
   // Calculate totals
   const totalIncome = transactions
@@ -18,7 +25,7 @@ const TabletDashboard = () => {
   const balance = totalIncome - totalExpenses;
   
   // Format currency
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -28,7 +35,7 @@ const TabletDashboard = () => {
   // Calculate spending by category
   const expensesByCategory = transactions
     .filter(t => t.type === 'expense')
-    .reduce((acc, transaction) => {
+    .reduce<Record<string, number>>((acc, transaction) => {
       const { category, amount } = transaction;
       if (!acc[category]) {
         acc[category] = 0;
@@ -45,7 +52,7 @@ const TabletDashboard = () => {
   // Monthly spending trend (last 6 months)
   const monthlyData = transactions
     .filter(t => t.type === 'expense')
-    .reduce((acc, transaction) => {
+    .reduce<Record<string, number>>((acc, transaction) => {
       const month = new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
       if (!acc[month]) {
         acc[month] = 0;
@@ -74,7 +81,7 @@ const TabletDashboard = () => {
 
   // Recent transactions
   const recentTransactions = [...transactions]
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 5);
 
   return (
@@ -148,13 +155,13 @@ const TabletDashboard = () => {
                     outerRadius="75%"
                     fill="#8884d8"
                     dataKey="value"
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    label={({ name, percent }) => `${name ?? ''} ${((percent ?? 0) * 100).toFixed(0)}%`}
                   >
                     {chartData.map((entry) => (
                       <Cell key={`cell-${entry.name}`} fill={COLORS[chartData.indexOf(entry) % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(value) => formatCurrency(value)} />
+                  <Tooltip formatter={(value) => formatChartValue(value)} />
                   <Legend />
                 </PieChart>
               </ResponsiveContainer>
@@ -182,7 +189,7 @@ const TabletDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                   <XAxis dataKey="month" tick={{ fontSize: 12 }} />
                   <YAxis tick={{ fontSize: 12 }} />
-                  <Tooltip formatter={(value) => formatCurrency(value)} />
+                  <Tooltip formatter={(value) => formatChartValue(value)} />
                   <Bar dataKey="amount" fill="#3B82F6" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>

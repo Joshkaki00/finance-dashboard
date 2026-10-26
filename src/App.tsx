@@ -1,5 +1,4 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from './store/hooks';
 import TransactionForm from './components/TransactionForm';
 import TransactionList from './components/TransactionList';
 import Dashboard from './components/Dashboard';
@@ -11,7 +10,7 @@ import AccessibilityAssistant from './components/AccessibilityAssistant';
 import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
-  const exampleUser = useSelector((state) => state.transactions.exampleUser);
+  const exampleUser = useAppSelector((state) => state.transactions.exampleUser);
 
   return (
     <>

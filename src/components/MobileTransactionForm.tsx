@@ -1,31 +1,30 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { addTransaction } from '../store/transactionsSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { updateTransactionDraft, type TransactionDraft } from '../types';
+
+const emptyDraft = (): TransactionDraft => ({
+  amount: '',
+  category: '',
+  date: new Date().toISOString().split('T')[0] ?? '',
+  description: '',
+  type: 'expense',
+});
 
 const MobileTransactionForm = () => {
-  const dispatch = useDispatch();
-  const categories = useSelector(state => state.categories);
-  
-  const [formData, setFormData] = useState({
-    amount: '',
-    category: '',
-    date: new Date().toISOString().split('T')[0],
-    description: '',
-    type: 'expense'
-  });
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector((state) => state.categories);
 
+  const [formData, setFormData] = useState<TransactionDraft>(emptyDraft);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData((current) => updateTransactionDraft(current, name, value));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     
     // Validate form
     if (!formData.amount || !formData.category || !formData.date) {
@@ -34,25 +33,21 @@ const MobileTransactionForm = () => {
     }
     
     // Process amount (ensure it's a positive number)
-    const amount = parseFloat(formData.amount);
-    
+    const amount = Number.parseFloat(formData.amount);
+    if (!Number.isFinite(amount)) {
+      alert('Please enter a valid amount');
+      return;
+    }
+
     dispatch(addTransaction({
       ...formData,
       amount
     }));
-    
-    // Show success message
+
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 2000);
-    
-    // Reset form
-    setFormData({
-      amount: '',
-      category: '',
-      date: new Date().toISOString().split('T')[0],
-      description: '',
-      type: 'expense'
-    });
+
+    setFormData(emptyDraft());
   };
 
   const quickAmounts = [10, 25, 50, 100];

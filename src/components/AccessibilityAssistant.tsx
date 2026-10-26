@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect, type KeyboardEvent } from 'react';
 import { 
   setHighContrast, 
   setTextSize, 
@@ -7,11 +6,12 @@ import {
   setEnhancedFocus,
   setKeyboardHelper 
 } from '../store/accessibilitySlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const AccessibilityAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
-  const accessibility = useSelector(state => state.accessibility);
+  const dispatch = useAppDispatch();
+  const accessibility = useAppSelector((state) => state.accessibility);
 
   // Apply accessibility settings to document
   useEffect(() => {
@@ -50,8 +50,8 @@ const AccessibilityAssistant = () => {
   }, [accessibility]);
 
   // Keyboard navigation for the panel
-  const handleKeyDown = (e) => {
-    if (e.key === 'Escape') {
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
       setIsOpen(false);
     }
   };
@@ -60,7 +60,7 @@ const AccessibilityAssistant = () => {
     dispatch(setHighContrast(!accessibility.highContrast));
   };
 
-  const handleTextSizeChange = (size) => {
+  const handleTextSizeChange = (size: string) => {
     dispatch(setTextSize(size));
   };
 

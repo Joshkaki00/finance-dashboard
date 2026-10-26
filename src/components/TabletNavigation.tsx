@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TabletTransactionForm from './TabletTransactionForm';
 import TransactionList from './TransactionList';
 import BudgetForm from './BudgetForm';

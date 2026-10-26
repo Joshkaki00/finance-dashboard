@@ -1,8 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../store/hooks';
 
 const MobileDashboard = () => {
-  const transactions = useSelector(state => state.transactions.transactions);
+  const transactions = useAppSelector((state) => state.transactions.transactions);
   
   // Calculate totals
   const totalIncome = transactions
@@ -16,7 +15,7 @@ const MobileDashboard = () => {
   const balance = totalIncome - totalExpenses;
   
   // Format currency
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -26,7 +25,7 @@ const MobileDashboard = () => {
   // Calculate spending by category for quick stats
   const expensesByCategory = transactions
     .filter(t => t.type === 'expense')
-    .reduce((acc, transaction) => {
+    .reduce<Record<string, number>>((acc, transaction) => {
       const { category, amount } = transaction;
       if (!acc[category]) {
         acc[category] = 0;
@@ -41,7 +40,7 @@ const MobileDashboard = () => {
 
   // Recent transactions (last 3)
   const recentTransactions = [...transactions]
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
 
   return (

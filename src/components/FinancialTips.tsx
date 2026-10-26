@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { fetchFinancialTips } from '../store/financialTipsSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const FinancialTips = () => {
-  const dispatch = useDispatch();
-  const { tips, status, error } = useSelector((state) => state.financialTips);
+  const dispatch = useAppDispatch();
+  const { tips, status, error } = useAppSelector((state) => state.financialTips);
 
   const apiKey = import.meta.env.VITE_API_NINJAS_KEY;
 
   useEffect(() => {
     if (apiKey && status === 'idle') {
-      dispatch(fetchFinancialTips());
+      void dispatch(fetchFinancialTips());
     }
   }, [apiKey, status, dispatch]);
 
@@ -48,7 +48,7 @@ const FinancialTips = () => {
             <span className="font-bold">Error:</span> {error || 'Failed to load financial tips.'}
           </p>
           <button 
-            onClick={() => dispatch(fetchFinancialTips())}
+            onClick={() => { void dispatch(fetchFinancialTips()); }}
             className="mt-2 bg-red-500 hover:bg-red-600 text-white font-medium py-1.5 px-3 rounded text-xs sm:text-sm transition-colors"
           >
             Try Again
@@ -66,7 +66,7 @@ const FinancialTips = () => {
         <div className="text-center py-6 sm:py-8 text-gray-500">
           <p className="text-sm sm:text-base">No financial tips available at the moment.</p>
           <button 
-            onClick={() => dispatch(fetchFinancialTips())}
+            onClick={() => { void dispatch(fetchFinancialTips()); }}
             className="mt-3 sm:mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-1.5 px-3 rounded text-xs sm:text-sm transition-colors"
           >
             Refresh
@@ -91,7 +91,7 @@ const FinancialTips = () => {
       </div>
       
       <button 
-        onClick={() => dispatch(fetchFinancialTips())}
+        onClick={() => { void dispatch(fetchFinancialTips()); }}
         className="mt-3 sm:mt-4 w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded text-sm transition-colors"
       >
         Get New Tips

@@ -1,10 +1,17 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { useAppSelector } from '../store/hooks';
+
+const formatChartValue = (value: unknown) => {
+  const amount = typeof value === 'number' ? value : Number(value);
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(Number.isFinite(amount) ? amount : 0);
+};
 
 const Dashboard = () => {
-  const transactions = useSelector(state => state.transactions.transactions);
-  const budget = useSelector(state => state.budget);
+  const transactions = useAppSelector((state) => state.transactions.transactions);
+  const budget = useAppSelector((state) => state.budget);
   
   // Calculate totals
   const totalIncome = transactions
@@ -18,7 +25,7 @@ const Dashboard = () => {
   const balance = totalIncome - totalExpenses;
   
   // Format currency
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -28,7 +35,7 @@ const Dashboard = () => {
   // Calculate spending by category for chart
   const expensesByCategory = transactions
     .filter(t => t.type === 'expense')
-    .reduce((acc, transaction) => {
+    .reduce<Record<string, number>>((acc, transaction) => {
       const { category, amount } = transaction;
       if (!acc[category]) {
         acc[category] = 0;
@@ -100,13 +107,13 @@ const Dashboard = () => {
                   outerRadius="70%"
                   fill="#8884d8"
                   dataKey="value"
-                  label={({ name, percent }) => window.innerWidth > 640 ? `${name} ${(percent * 100).toFixed(0)}%` : `${(percent * 100).toFixed(0)}%`}
+                  label={({ name, percent }) => window.innerWidth > 640 ? `${name ?? ''} ${((percent ?? 0) * 100).toFixed(0)}%` : `${((percent ?? 0) * 100).toFixed(0)}%`}
                 >
                   {chartData.map((entry) => (
                     <Cell key={`cell-${entry.name}`} fill={COLORS[chartData.indexOf(entry) % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => formatCurrency(value)} />
+                <Tooltip formatter={(value) => formatChartValue(value)} />
                 <Legend 
                   wrapperStyle={{ fontSize: '12px' }}
                   iconSize={8}
