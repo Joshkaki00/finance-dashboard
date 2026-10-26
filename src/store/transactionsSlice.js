@@ -26,9 +26,12 @@ export const transactionsSlice = createSlice({
       if (index !== -1) {
         state.transactions[index] = action.payload;
       }
+    },
+    hydrateTransactions: (state, action) => {
+      state.transactions = action.payload;
     }
   }
 });
 
-export const { addTransaction, deleteTransaction, updateTransaction } = transactionsSlice.actions;
+export const { addTransaction, deleteTransaction, updateTransaction, hydrateTransactions } = transactionsSlice.actions;
 export default transactionsSlice.reducer;

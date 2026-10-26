@@ -25,12 +25,10 @@ const BudgetForm = () => {
     
     // Update each category in the budget
     Object.entries(budgetValues).forEach(([category, amount]) => {
-      if (category !== 'income') {
-        dispatch(updateBudget({
-          category,
-          amount: parseFloat(amount) || 0
-        }));
-      }
+      dispatch(updateBudget({
+        category,
+        amount: parseFloat(amount) || 0
+      }));
     });
     
     alert('Budget updated successfully!');

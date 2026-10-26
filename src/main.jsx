@@ -5,29 +5,36 @@ import { store } from './store'
 import App from './App'
 import './index.css'
 import { measurePerformance, preloadCriticalResources, registerServiceWorker } from './utils/performance'
+import { loadFinance, startSaving } from './db/client'
+import { hydrateTransactions } from './store/transactionsSlice'
+import { hydrateBudget } from './store/budgetSlice'
+import { hydrateCategories } from './store/categoriesSlice'
 
-// Add app loaded class to hide loading spinner
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-// Show loading spinner initially
 document.body.classList.remove('app-loaded');
 
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
-
-// Initialize performance monitoring
-measurePerformance();
-preloadCriticalResources();
-
-// Hide loading spinner once React has mounted
-setTimeout(() => {
+function renderApp() {
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>
+  );
   document.body.classList.add('app-loaded');
-}, 100);
+  measurePerformance();
+  preloadCriticalResources();
+  registerServiceWorker();
+}
 
-// Register service worker for caching
-registerServiceWorker();
+loadFinance()
+  .then((data) => {
+    store.dispatch(hydrateTransactions(data.transactions));
+    store.dispatch(hydrateBudget(data.budget));
+    store.dispatch(hydrateCategories(data.categories));
+    startSaving();
+  })
+  .catch((error) => {
+    console.error('Finance database failed to open. Changes in this visit will not be saved.', error);
+  })
+  .finally(renderApp);

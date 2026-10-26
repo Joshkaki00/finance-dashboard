@@ -15,9 +15,10 @@ export const budgetSlice = createSlice({
     updateBudget: (state, action) => {
       const { category, amount } = action.payload;
       state[category] = parseFloat(amount);
-    }
+    },
+    hydrateBudget: (state, action) => action.payload
   }
 });
 
-export const { updateBudget } = budgetSlice.actions;
+export const { updateBudget, hydrateBudget } = budgetSlice.actions;
 export default budgetSlice.reducer;

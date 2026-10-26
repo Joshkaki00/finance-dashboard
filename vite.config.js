@@ -46,7 +46,8 @@ export default defineConfig({
   // Optimize dependencies
   optimizeDeps: {
     include: ['react', 'react-dom', '@reduxjs/toolkit', 'react-redux', 'recharts'],
-    // Don't exclude recharts to avoid import issues
+    // The SQLite WASM build locates its own .wasm file and must not be prebundled.
+    exclude: ['@sqlite.org/sqlite-wasm'],
   },
   // GitHub Pages compatibility
   server: {
