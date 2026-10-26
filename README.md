@@ -247,7 +247,3 @@ Financial tips are calculated in the browser from your transactions and budgets.
 - **Categories**: `src/store/categoriesSlice.ts`
 - **Tips**: `src/store/financialTipsSlice.ts`
 - **Breakpoints**: component layout classes
-
-Personalized savings tips are generated from the user's own transactions and budgets. The interface covers loading, error, and empty states, form validation, and responsive layouts.
-
-The AI-generated code was reviewed, understood, and modified to fit project requirements. I have a complete understanding of all the code in this project and made necessary adjustments to ensure it works as expected.
