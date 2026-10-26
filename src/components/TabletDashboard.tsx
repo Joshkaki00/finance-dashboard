@@ -146,16 +146,16 @@ const TabletDashboard = () => {
           {chartData.length > 0 ? (
             <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <PieChart margin={{ top: 16, right: 28, bottom: 8, left: 28 }}>
                   <Pie
                     data={chartData}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    outerRadius="75%"
+                    outerRadius="62%"
                     fill="#8884d8"
                     dataKey="value"
-                    label={({ name, percent }) => `${name ?? ''} ${((percent ?? 0) * 100).toFixed(0)}%`}
+                    label={({ percent }) => `${((percent ?? 0) * 100).toFixed(0)}%`}
                   >
                     {chartData.map((entry) => (
                       <Cell key={`cell-${entry.name}`} fill={COLORS[chartData.indexOf(entry) % COLORS.length]} />

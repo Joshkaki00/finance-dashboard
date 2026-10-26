@@ -96,18 +96,18 @@ const Dashboard = () => {
         <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Expenses by Category</h2>
         
         {chartData.length > 0 ? (
-          <div className="h-48 sm:h-64">
+          <div className="h-72 sm:h-80">
             <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
+              <PieChart margin={{ top: 24, right: 96, bottom: 8, left: 96 }}>
                 <Pie
                   data={chartData}
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  outerRadius="70%"
+                  outerRadius="50%"
                   fill="#8884d8"
                   dataKey="value"
-                  label={({ name, percent }) => window.innerWidth > 640 ? `${name ?? ''} ${((percent ?? 0) * 100).toFixed(0)}%` : `${((percent ?? 0) * 100).toFixed(0)}%`}
+                  label={({ name, percent }) => `${name ?? ''} ${((percent ?? 0) * 100).toFixed(0)}%`}
                 >
                   {chartData.map((entry) => (
                     <Cell key={`cell-${entry.name}`} fill={COLORS[chartData.indexOf(entry) % COLORS.length]} />
