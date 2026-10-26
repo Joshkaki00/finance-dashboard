@@ -40,7 +40,7 @@ const MobileDashboard = () => {
     .sort(([,a], [,b]) => b - a)[0];
 
   // Recent transactions (last 3)
-  const recentTransactions = transactions
+  const recentTransactions = [...transactions]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 3);
 

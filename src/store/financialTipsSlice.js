@@ -5,9 +5,14 @@ export const fetchFinancialTips = createAsyncThunk(
   'financialTips/fetchTips',
   async (_, { rejectWithValue }) => {
     try {
+      const apiKey = import.meta.env.VITE_API_NINJAS_KEY;
+      if (!apiKey) {
+        return rejectWithValue('missing-key');
+      }
+
       const response = await fetch('https://api.api-ninjas.com/v1/quotes?category=money', {
         headers: {
-          'X-Api-Key': 'YOUR_API_NINJAS_KEY' // In a real app, store this in .env file
+          'X-Api-Key': apiKey
         }
       });
       

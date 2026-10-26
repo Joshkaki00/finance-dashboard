@@ -55,25 +55,101 @@ async function openDatabase() {
       name TEXT PRIMARY KEY,
       position INTEGER NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS meta (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
   `);
   seed();
 }
 
+const EXAMPLE_USER = 'Alex Rivera';
+const EXAMPLE_IDS = [1, 2, 3, 4, 5, 6];
+const EXAMPLE_BUDGETS = {
+  income: 4200,
+  groceries: 500,
+  utilities: 180,
+  entertainment: 120,
+  other: 150,
+};
+
+function daysAgo(days) {
+  const date = new Date();
+  date.setDate(date.getDate() - days);
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
 function seed() {
   const existing = query('SELECT COUNT(*) AS count FROM categories');
-  if (asNumber(existing[0].count) > 0) return;
+  if (asNumber(existing[0].count) === 0) {
+    run('BEGIN');
+    try {
+      DEFAULT_CATEGORIES.forEach((name, position) => {
+        run('INSERT INTO categories (name, position) VALUES (?, ?)', [name, position]);
+        run('INSERT INTO budgets (category, amount) VALUES (?, 0)', [name]);
+      });
+      run('COMMIT');
+    } catch (error) {
+      run('ROLLBACK');
+      throw error;
+    }
+  }
+
+  seedExampleUser();
+}
+
+function seedExampleUser() {
+  const marker = query("SELECT value FROM meta WHERE key = 'initialized'");
+  if (marker.length > 0) return;
+
+  const transactionCount = asNumber(query('SELECT COUNT(*) AS count FROM transactions')[0].count);
+  const budgetTotal = asNumber(query('SELECT COALESCE(SUM(amount), 0) AS total FROM budgets')[0].total);
+  if (transactionCount > 0 || budgetTotal > 0) {
+    run("INSERT INTO meta (key, value) VALUES ('initialized', 'user')");
+    return;
+  }
+
+  const sample = [
+    [1, 4200, 'income', daysAgo(2), 'Paycheck', 'income'],
+    [2, 86.42, 'groceries', daysAgo(1), 'Market run', 'expense'],
+    [3, 142.18, 'utilities', daysAgo(4), 'Electric bill', 'expense'],
+    [4, 28, 'entertainment', daysAgo(3), 'Movie night', 'expense'],
+    [5, 54.1, 'groceries', daysAgo(6), 'Groceries', 'expense'],
+    [6, 64, 'other', daysAgo(5), 'Transit pass', 'expense'],
+  ];
 
   run('BEGIN');
   try {
-    DEFAULT_CATEGORIES.forEach((name, position) => {
-      run('INSERT INTO categories (name, position) VALUES (?, ?)', [name, position]);
-      run('INSERT INTO budgets (category, amount) VALUES (?, 0)', [name]);
+    sample.forEach((row) => {
+      run(
+        'INSERT INTO transactions (id, amount, category, date, description, type) VALUES (?, ?, ?, ?, ?, ?)',
+        row
+      );
     });
+    Object.entries(EXAMPLE_BUDGETS).forEach(([category, amount]) => {
+      run(
+        `INSERT INTO budgets (category, amount) VALUES (?, ?)
+         ON CONFLICT(category) DO UPDATE SET amount = excluded.amount`,
+        [category, amount]
+      );
+    });
+    run("INSERT INTO meta (key, value) VALUES ('initialized', 'example')");
     run('COMMIT');
   } catch (error) {
     run('ROLLBACK');
     throw error;
   }
+}
+
+function showingExampleUser() {
+  const marker = query("SELECT value FROM meta WHERE key = 'initialized'");
+  if (marker[0]?.value !== 'example') return null;
+
+  const ids = query('SELECT id FROM transactions ORDER BY id').map((row) => asNumber(row.id));
+  const sameTransactions = ids.length === EXAMPLE_IDS.length && ids.every((id, index) => id === EXAMPLE_IDS[index]);
+  return sameTransactions ? EXAMPLE_USER : null;
 }
 
 function load() {
@@ -99,7 +175,7 @@ function load() {
     type: String(row.type),
   }));
 
-  return { transactions, budget, categories };
+  return { transactions, budget, categories, exampleUser: showingExampleUser() };
 }
 
 function apply(type, payload) {

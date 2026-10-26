@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   transactions: [],
+  exampleUser: null,
 };
 
 export const transactionsSlice = createSlice({
@@ -29,9 +30,12 @@ export const transactionsSlice = createSlice({
     },
     hydrateTransactions: (state, action) => {
       state.transactions = action.payload;
+    },
+    setExampleUser: (state, action) => {
+      state.exampleUser = action.payload;
     }
   }
 });
 
-export const { addTransaction, deleteTransaction, updateTransaction, hydrateTransactions } = transactionsSlice.actions;
+export const { addTransaction, deleteTransaction, updateTransaction, hydrateTransactions, setExampleUser } = transactionsSlice.actions;
 export default transactionsSlice.reducer;

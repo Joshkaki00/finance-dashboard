@@ -1,5 +1,9 @@
 # Personal Finance Dashboard
 
+**Live:** [https://joshkaki00.github.io/finance-dashboard/](https://joshkaki00.github.io/finance-dashboard/)
+
+A new browser opens with sample finances for Alex Rivera. Anything you add, edit, or delete stays in that browser only. The site is a static GitHub Pages deploy, so there is no server and nothing sleeps on the first load.
+
 A modern, responsive web application for managing personal finances, built with React, Redux, and Tailwind CSS. Features complete WCAG 2.2 accessibility compliance and optimized layouts for mobile, tablet, and desktop devices.
 
 ## 🌟 Features
@@ -55,10 +59,10 @@ cd finance-dashboard
 npm install
 ```
 
-3. **Set up API key (optional):**
+3. **Set up the quotes API key (optional):**
    - Get a free API key from [API Ninjas](https://api-ninjas.com/)
-   - In `src/store/financialTipsSlice.js`, replace `'YOUR_API_NINJAS_KEY'` with your actual API key
-   - For production, use environment variables
+   - Copy `.env.example` to `.env.local` and set `VITE_API_NINJAS_KEY`
+   - Leave it unset to keep the built-in tip. The key is not stored in the repo.
 
 4. **Start development server:**
 ```bash
@@ -66,7 +70,7 @@ npm run dev
 ```
 
 5. **Open your browser:**
-   Navigate to `http://localhost:5173`
+   Navigate to `http://localhost:5173/finance-dashboard/`
 
 ### Build for Production
 

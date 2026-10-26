@@ -6,11 +6,24 @@ const FinancialTips = () => {
   const dispatch = useDispatch();
   const { tips, status, error } = useSelector((state) => state.financialTips);
 
+  const apiKey = import.meta.env.VITE_API_NINJAS_KEY;
+
   useEffect(() => {
-    if (status === 'idle') {
+    if (apiKey && status === 'idle') {
       dispatch(fetchFinancialTips());
     }
-  }, [status, dispatch]);
+  }, [apiKey, status, dispatch]);
+
+  if (!apiKey) {
+    return (
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
+        <p className="text-sm sm:text-base text-gray-700">
+          Pay yourself first, then spend what is left.
+        </p>
+      </div>
+    );
+  }
 
   // Loading state
   if (status === 'loading') {

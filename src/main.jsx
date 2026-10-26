@@ -6,7 +6,7 @@ import App from './App'
 import './index.css'
 import { measurePerformance, preloadCriticalResources, registerServiceWorker } from './utils/performance'
 import { loadFinance, startSaving } from './db/client'
-import { hydrateTransactions } from './store/transactionsSlice'
+import { hydrateTransactions, setExampleUser } from './store/transactionsSlice'
 import { hydrateBudget } from './store/budgetSlice'
 import { hydrateCategories } from './store/categoriesSlice'
 
@@ -30,6 +30,7 @@ function renderApp() {
 loadFinance()
   .then((data) => {
     store.dispatch(hydrateTransactions(data.transactions));
+    store.dispatch(setExampleUser(data.exampleUser));
     store.dispatch(hydrateBudget(data.budget));
     store.dispatch(hydrateCategories(data.categories));
     startSaving();

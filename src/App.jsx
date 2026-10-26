@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import TransactionForm from './components/TransactionForm';
 import TransactionList from './components/TransactionList';
 import Dashboard from './components/Dashboard';
@@ -10,8 +11,15 @@ import AccessibilityAssistant from './components/AccessibilityAssistant';
 import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
+  const exampleUser = useSelector((state) => state.transactions.exampleUser);
+
   return (
     <>
+      <p className="bg-blue-800 text-white text-sm text-center px-4 py-2" role="status">
+        {exampleUser
+          ? `Sample finances for ${exampleUser}. Saved in this browser only.`
+          : 'Saved in this browser only.'}
+      </p>
       {/* Skip to content link for keyboard navigation - WCAG 2.4.1 */}
       <a 
         href="#main-content" 
