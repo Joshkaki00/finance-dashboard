@@ -4,41 +4,42 @@
 
 A new browser opens with sample finances for Alex Rivera. Anything you add, edit, or delete stays in that browser only. The site is a static GitHub Pages deploy, so there is no server and nothing sleeps on the first load.
 
-A modern, responsive web application for managing personal finances, built with React, Redux, and Tailwind CSS. Features complete WCAG 2.2 accessibility compliance and optimized layouts for mobile, tablet, and desktop devices.
+A responsive web application for managing personal finances, built with React, TypeScript, Redux, and Tailwind CSS. It includes WCAG 2.2 accessibility support and layouts for mobile, tablet, and desktop.
 
-## 🌟 Features
+## Features
 
-- 📊 **Interactive Dashboard** with financial overview and charts
-- 💰 **Transaction Management** (add, view, filter, and delete transactions)
-- 📈 **Budget Planning** and tracking with visual progress indicators
-- 🎨 **Responsive Design** with mobile/tablet/desktop optimized layouts
-- ♿ **Full WCAG 2.2 Accessibility** compliance (Level AA)
-- 🔄 **Real-time State Management** with Redux Toolkit
-- 💡 **Financial Tips** from external API integration
-- ✨ **Loading, Error, and Empty States** properly handled
+- Interactive dashboard with a financial overview and charts
+- Transaction management: add, view, filter, and delete
+- Budget planning and tracking with progress indicators
+- Responsive layouts for mobile, tablet, and desktop
+- WCAG 2.2 Level AA accessibility
+- Redux Toolkit for state, with SQLite saved in this browser
+- Financial tips calculated from your income, spending, and budgets
+- Loading, error, and empty states
 
-## 📱 Responsive Breakpoints
+## Responsive Breakpoints
 
-- **Mobile** (< 768px): Bottom tab navigation with card-based layouts
-- **Tablet** (768px - 1279px): Sidebar navigation with enhanced touch targets
-- **Desktop** (≥ 1280px): Multi-column layout with comprehensive features
+- **Mobile** (< 768px): bottom tab navigation with card layouts
+- **Tablet** (768px - 1279px): sidebar navigation with larger touch targets
+- **Desktop** (>= 1280px): multi-column layout
 
-## 🛠 Tech Stack
+## Tech Stack
 
-- **Frontend**: React 19 with modern hooks
-- **State Management**: Redux Toolkit with Redux Thunk
-- **Styling**: Tailwind CSS 4.1 with custom responsive design
-- **Build Tool**: Vite 6 for fast development and optimized builds
-- **Charts**: Recharts for data visualization
-- **Code Quality**: ESLint with React-specific rules
-- **Accessibility**: WCAG 2.2 Level AA compliant
-- **Deployment**: GitHub Pages with automated CI/CD
+- **Frontend**: React 19 with TypeScript
+- **State**: Redux Toolkit
+- **Persistence**: SQLite WASM in this browser
+- **Styling**: Tailwind CSS 4.1
+- **Build**: Vite 6
+- **Charts**: Recharts
+- **Lint**: ESLint with TypeScript type-checking
+- **Accessibility**: WCAG 2.2 Level AA
+- **Deploy**: GitHub Pages with GitHub Actions
 
-## 🚀 Live Demo
+## Live Demo
 
-Visit the live application: **[https://joshkaki00.github.io/finance-dashboard/](https://joshkaki00.github.io/finance-dashboard/)**
+[https://joshkaki00.github.io/finance-dashboard/](https://joshkaki00.github.io/finance-dashboard/)
 
-## 📦 Installation & Setup
+## Installation and Setup
 
 ### Prerequisites
 
@@ -59,7 +60,7 @@ cd finance-dashboard
 npm install
 ```
 
-3. **Start development server:**
+3. **Start the development server:**
 ```bash
 npm run dev
 ```
@@ -75,11 +76,9 @@ npm run build
 
 The built files will be in the `dist/` directory.
 
-## 🚀 Deployment to GitHub Pages
+## Deployment to GitHub Pages
 
-This project is configured for easy deployment to GitHub Pages using two methods:
-
-### Method 1: Automated GitHub Actions (Recommended)
+### Method 1: GitHub Actions
 
 1. **Push to GitHub:**
 ```bash
@@ -92,142 +91,145 @@ git push -u origin main
 
 2. **Enable GitHub Pages:**
    - Go to your repository settings
-   - Navigate to "Pages" section
-   - Set source to "GitHub Actions"
+   - Navigate to "Pages"
+   - Set the source to "GitHub Actions"
 
 3. **Update configuration:**
    - `package.json` `homepage` is `https://joshkaki00.github.io/finance-dashboard/`
    - Edit `vite.config.ts` if your repository name is different
 
-The GitHub Action will automatically build and deploy on every push to main.
+The GitHub Action builds and deploys on every push to main.
 
 ### Method 2: Manual Deployment
 
 ```bash
-# Build and deploy manually
 npm run deploy
 ```
 
-This will build the project and push to the `gh-pages` branch.
+This builds the project and pushes to the `gh-pages` branch.
 
-## 📱 Usage Guide
+## Usage Guide
 
 ### Dashboard
-- View comprehensive financial overview
-- Monitor spending patterns with interactive charts
-- Track budget progress with visual indicators
-- See recent transaction activity
+
+- View the financial overview
+- Monitor spending with charts
+- Track budget progress
+- See recent transactions
 
 ### Add Transactions
-- **Mobile**: Enhanced form with quick amount buttons
-- **Tablet**: Visual type selection with category icons
-- **Desktop**: Traditional form layout
-- Support for both income and expenses
+
+- **Mobile**: form with quick amount buttons
+- **Tablet**: type selection with category icons
+- **Desktop**: standard form
+- Income and expenses
 
 ### Transaction Management
-- **Mobile**: Card-based layout with swipe-friendly design
-- **Desktop**: Sortable table with filtering options
-- Filter by type (All, Income, Expenses)
-- Delete transactions with confirmation
+
+- **Mobile**: card layout
+- **Desktop**: filterable list
+- Filter by All, Income, or Expenses
+- Delete with confirmation
 
 ### Budget Planning
-- Set monthly budgets for different categories
-- Visual progress tracking with color-coded indicators
-- Real-time budget vs. actual spending comparison
-- Responsive grid layout for easy management
+
+- Set a monthly budget for each category
+- Color-coded progress
+- Budget compared with actual spending
 
 ### Financial Tips
-- Advice generated from your income, spending, and budgets
-- Savings rate, over-budget warnings, and the category costing you the most
-- Updates as soon as you add a transaction or change a budget
 
-## ♿ Accessibility Features
+- Advice from your income, spending, and budgets
+- Savings rate, over-budget warnings, and your highest expense category
+- Updates when you add a transaction or change a budget
 
-This application is **WCAG 2.2 Level AA compliant** with the following features:
+## Accessibility
 
-- **Keyboard Navigation**: Full keyboard accessibility with skip links
-- **Screen Reader Support**: Proper ARIA attributes and semantic HTML
-- **High Contrast**: Support for high contrast mode
-- **Reduced Motion**: Respects user's motion preferences
-- **Touch Targets**: Minimum 44×44px touch targets on mobile
-- **Focus Management**: Clear focus indicators and logical tab order
-- **Color Contrast**: Exceeds WCAG contrast requirements
-- **Responsive Text**: Scalable fonts and layouts
+WCAG 2.2 Level AA:
 
-## 🧪 Testing
+- **Keyboard navigation**: skip link and full keyboard access
+- **Screen readers**: ARIA attributes and semantic HTML
+- **High contrast**: high contrast mode
+- **Reduced motion**: follows the user's motion preference
+- **Touch targets**: at least 44x44px on mobile
+- **Focus**: visible focus and a logical tab order
+- **Contrast**: meets WCAG contrast requirements
+- **Text**: scalable type and layout
+
+## Testing
 
 ```bash
-# Run linting
 npm run lint
-
-# Preview production build
+npm run typecheck
 npm run preview
 ```
 
 ### Accessibility Testing
 
-Test with:
 - Screen readers (NVDA, JAWS, VoiceOver)
 - Keyboard navigation (Tab, Enter, Space, Arrow keys)
 - Mobile accessibility (iOS VoiceOver, Android TalkBack)
 - Color contrast tools
 - Lighthouse accessibility audit
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
-├── components/           # React components
-│   ├── Dashboard.tsx    # Main dashboard with charts
-│   ├── TransactionForm.tsx
-│   ├── TransactionList.tsx
-│   ├── BudgetForm.tsx
-│   ├── FinancialTips.tsx
-│   ├── MobileNavigation.tsx    # Mobile tab navigation
-│   ├── TabletNavigation.tsx    # Tablet sidebar navigation
-│   ├── MobileDashboard.tsx     # Mobile-optimized dashboard
-│   ├── MobileTransactionForm.tsx
-│   └── TabletTransactionForm.tsx
-├── store/               # Redux store and slices
-│   ├── index.ts
-│   ├── transactionsSlice.ts
-│   ├── budgetSlice.ts
-│   ├── categoriesSlice.ts
-│   └── financialTipsSlice.ts
-├── App.tsx             # Main app with responsive layout
-├── main.tsx           # React entry point
-├── index.css          # Global styles with accessibility features
-└── assets/            # Static assets
+|-- components/
+|   |-- Dashboard.tsx
+|   |-- TransactionForm.tsx
+|   |-- TransactionList.tsx
+|   |-- BudgetForm.tsx
+|   |-- FinancialTips.tsx
+|   |-- MobileNavigation.tsx
+|   |-- TabletNavigation.tsx
+|   |-- MobileDashboard.tsx
+|   |-- MobileTransactionForm.tsx
+|   |-- TabletTransactionForm.tsx
+|-- store/
+|   |-- index.ts
+|   |-- transactionsSlice.ts
+|   |-- budgetSlice.ts
+|   |-- categoriesSlice.ts
+|   |-- financialTipsSlice.ts
+|-- db/
+|   |-- client.ts
+|   |-- worker.ts
+|-- App.tsx
+|-- main.tsx
+|-- index.css
+|-- assets/
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+4. Push the branch (`git push origin feature/AmazingFeature`)
+5. Open a pull request
 
 ### Development Guidelines
 
-- Follow existing code style and patterns
-- Maintain WCAG 2.2 accessibility compliance
-- Test on mobile, tablet, and desktop breakpoints
-- Ensure proper ARIA attributes for new components
-- Update tests and documentation as needed
+- Follow the existing code style
+- Keep WCAG 2.2 accessibility
+- Test mobile, tablet, and desktop
+- Add ARIA attributes for new components
+- Update documentation when behavior changes
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT. See [LICENSE](LICENSE).
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- [Recharts](https://recharts.org/) for beautiful, responsive charts
-- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
-- [Redux Toolkit](https://redux-toolkit.js.org/) for efficient state management
+- [Recharts](https://recharts.org/) for charts
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Redux Toolkit](https://redux-toolkit.js.org/) for state management
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/) for accessibility guidelines
 
-## 📊 Browser Support
+## Browser Support
 
 - Chrome (latest)
 - Firefox (latest)
@@ -235,37 +237,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Edge (latest)
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
-## 🔧 Configuration
+## Configuration
 
-### Environment Variables
-
-No API key is required. Financial tips are calculated in the browser from your own transactions and budgets.
+Financial tips are calculated in the browser from your transactions and budgets. No API key is required.
 
 ### Customization
 
-- **Colors**: Update Tailwind config in `tailwind.config.js`
-- **Categories**: Modify `src/store/categoriesSlice.ts`
-- **Tips**: Update the advice rules in `src/store/financialTipsSlice.ts`
-- **Responsive Breakpoints**: Adjust in component CSS classes
+- **Colors**: Tailwind classes in the components
+- **Categories**: `src/store/categoriesSlice.ts`
+- **Tips**: `src/store/financialTipsSlice.ts`
+- **Breakpoints**: component layout classes
 
----
-
-**Built with ❤️ for accessible, responsive personal finance management**
-- Personalized savings tips generated from the user's own transactions and budgets
-- Designing UI components for different states (loading, error, empty)
-- Debugging form validation issues
-- Creating responsive Tailwind CSS layouts
+Personalized savings tips are generated from the user's own transactions and budgets. The interface covers loading, error, and empty states, form validation, and responsive layouts.
 
 The AI-generated code was reviewed, understood, and modified to fit project requirements. I have a complete understanding of all the code in this project and made necessary adjustments to ensure it works as expected.
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the Apache 2.0 License - see the LICENSE file for details.
