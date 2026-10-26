@@ -1,13 +1,4 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { useAppSelector } from '../store/hooks';
-
-const formatChartValue = (value: unknown) => {
-  const amount = typeof value === 'number' ? value : Number(value);
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(Number.isFinite(amount) ? amount : 0);
-};
 
 const Dashboard = () => {
   const transactions = useAppSelector((state) => state.transactions.transactions);
@@ -44,13 +35,9 @@ const Dashboard = () => {
       return acc;
     }, {});
   
-  const chartData = Object.entries(expensesByCategory).map(([name, value]) => ({
-    name,
-    value,
-  }));
-  
-  // Colors for the pie chart
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A569BD'];
+  const chartData = Object.entries(expensesByCategory)
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value);
   
   // Budget vs. Actual Comparison
   const budgetComparison = Object.entries(expensesByCategory)
@@ -96,31 +83,28 @@ const Dashboard = () => {
         <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Expenses by Category</h2>
         
         {chartData.length > 0 ? (
-          <div className="h-72 sm:h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart margin={{ top: 24, right: 96, bottom: 8, left: 96 }}>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  outerRadius="50%"
-                  fill="#8884d8"
-                  dataKey="value"
-                  label={({ name, percent }) => `${name ?? ''} ${((percent ?? 0) * 100).toFixed(0)}%`}
-                >
-                  {chartData.map((entry) => (
-                    <Cell key={`cell-${entry.name}`} fill={COLORS[chartData.indexOf(entry) % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={(value) => formatChartValue(value)} />
-                <Legend 
-                  wrapperStyle={{ fontSize: '12px' }}
-                  iconSize={8}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+          <ul className="space-y-4" aria-label="Expenses by category">
+            {chartData.map((entry) => {
+              const percent = totalExpenses > 0 ? Math.round((entry.value / totalExpenses) * 100) : 0;
+              return (
+                <li key={entry.name}>
+                  <div className="flex items-baseline justify-between gap-3 text-sm sm:text-base">
+                    <span className="capitalize font-medium text-gray-800">{entry.name}</span>
+                    <span className="tabular-nums text-gray-700 shrink-0">
+                      {formatCurrency(entry.value)}
+                      <span className="text-gray-500"> ({percent}%)</span>
+                    </span>
+                  </div>
+                  <div className="mt-1.5 h-3 rounded-full bg-gray-200" aria-hidden="true">
+                    <div
+                      className="h-3 rounded-full bg-blue-600"
+                      style={{ width: `${totalExpenses > 0 ? (entry.value / totalExpenses) * 100 : 0}%` }}
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         ) : (
           <p className="text-center text-gray-500 py-8 sm:py-12 text-sm sm:text-base">No expense data to display.</p>
         )}

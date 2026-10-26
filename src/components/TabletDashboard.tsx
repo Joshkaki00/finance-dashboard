@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { useAppSelector } from '../store/hooks';
 
 const formatChartValue = (value: unknown) => {
@@ -44,10 +44,9 @@ const TabletDashboard = () => {
       return acc;
     }, {});
   
-  const chartData = Object.entries(expensesByCategory).map(([name, value]) => ({
-    name,
-    value,
-  }));
+  const chartData = Object.entries(expensesByCategory)
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value);
 
   // Monthly spending trend (last 6 months)
   const monthlyData = transactions
@@ -65,9 +64,6 @@ const TabletDashboard = () => {
     .map(([month, amount]) => ({ month, amount }))
     .slice(-6);
 
-  // Colors for charts
-  const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4'];
-  
   // Budget comparison
   const budgetComparison = Object.entries(expensesByCategory)
     .filter(([category]) => category !== 'income')
@@ -140,32 +136,32 @@ const TabletDashboard = () => {
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Expenses Pie Chart */}
+        {/* Expenses by category */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
           <h3 className="text-xl font-semibold text-gray-800 mb-6">Spending by Category</h3>
           {chartData.length > 0 ? (
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart margin={{ top: 16, right: 28, bottom: 8, left: 28 }}>
-                  <Pie
-                    data={chartData}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    outerRadius="62%"
-                    fill="#8884d8"
-                    dataKey="value"
-                    label={({ percent }) => `${((percent ?? 0) * 100).toFixed(0)}%`}
-                  >
-                    {chartData.map((entry) => (
-                      <Cell key={`cell-${entry.name}`} fill={COLORS[chartData.indexOf(entry) % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip formatter={(value) => formatChartValue(value)} />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
+            <ul className="space-y-5" aria-label="Spending by category">
+              {chartData.map((entry) => {
+                const percent = totalExpenses > 0 ? Math.round((entry.value / totalExpenses) * 100) : 0;
+                return (
+                  <li key={entry.name}>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="capitalize font-medium text-gray-800">{entry.name}</span>
+                      <span className="tabular-nums text-gray-700 shrink-0">
+                        {formatCurrency(entry.value)}
+                        <span className="text-gray-500"> ({percent}%)</span>
+                      </span>
+                    </div>
+                    <div className="mt-2 h-3 rounded-full bg-gray-200" aria-hidden="true">
+                      <div
+                        className="h-3 rounded-full bg-blue-600"
+                        style={{ width: `${totalExpenses > 0 ? (entry.value / totalExpenses) * 100 : 0}%` }}
+                      />
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           ) : (
             <div className="h-80 flex items-center justify-center text-gray-500">
               <div className="text-center">
