@@ -5,8 +5,7 @@
 ### 1. Update Configuration
 
 **Edit `package.json`:**
-- Change `"homepage": "https://yourusername.github.io/finance-dashboard"` 
-- Replace `yourusername` with your actual GitHub username
+- `"homepage": "https://joshkaki00.github.io/finance-dashboard/"`
 
 **Edit `vite.config.js` (if needed):**
 - Change `base: '/finance-dashboard/'` if your repository name is different
@@ -27,7 +26,7 @@ git commit -m "Initial commit: Complete finance dashboard with WCAG 2.2 complian
 git branch -M main
 
 # Add remote origin (replace with your repository URL)
-git remote add origin https://github.com/yourusername/finance-dashboard.git
+git remote add origin https://github.com/Joshkaki00/finance-dashboard.git
 
 # Push to GitHub
 git push -u origin main
@@ -49,7 +48,7 @@ The GitHub Action (`.github/workflows/deploy.yml`) will automatically:
 - ✅ Build the project
 - ✅ Deploy to GitHub Pages
 
-Your site will be available at: `https://yourusername.github.io/finance-dashboard/`
+Your site will be available at: `https://joshkaki00.github.io/finance-dashboard/`
 
 ### 5. Manual Deployment (Alternative)
 

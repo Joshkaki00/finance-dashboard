@@ -46,7 +46,7 @@ Visit the live application: **[https://joshkaki00.github.io/finance-dashboard/](
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/finance-dashboard.git
+git clone https://github.com/Joshkaki00/finance-dashboard.git
 cd finance-dashboard
 ```
 
@@ -87,7 +87,7 @@ This project is configured for easy deployment to GitHub Pages using two methods
 git add .
 git commit -m "Initial commit"
 git branch -M main
-git remote add origin https://github.com/yourusername/finance-dashboard.git
+git remote add origin https://github.com/Joshkaki00/finance-dashboard.git
 git push -u origin main
 ```
 
@@ -97,7 +97,7 @@ git push -u origin main
    - Set source to "GitHub Actions"
 
 3. **Update configuration:**
-   - Edit `package.json` and change `yourusername` to your GitHub username
+   - `package.json` `homepage` is `https://joshkaki00.github.io/finance-dashboard/`
    - Edit `vite.config.js` if your repository name is different
 
 The GitHub Action will automatically build and deploy on every push to main.

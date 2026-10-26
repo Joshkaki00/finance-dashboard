@@ -3,7 +3,7 @@
   "private": false,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://yourusername.github.io/finance-dashboard",
+  "homepage": "https://joshkaki00.github.io/finance-dashboard/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
