@@ -16,7 +16,7 @@ function App() {
     <>
       <p className="bg-blue-800 text-white text-sm text-center px-4 py-2" role="status">
         {exampleUser
-          ? `Sample finances for ${exampleUser}. Saved in this browser only.`
+          ? `Sample finances for a ${exampleUser}. Saved in this browser only.`
           : 'Saved in this browser only.'}
       </p>
       {/* Skip to content link for keyboard navigation - WCAG 2.4.1 */}

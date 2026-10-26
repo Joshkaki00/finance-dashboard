@@ -90,7 +90,7 @@ async function openDatabase(): Promise<void> {
   seed();
 }
 
-const EXAMPLE_USER = 'Alex Rivera';
+const EXAMPLE_USER = 'demo user';
 const EXAMPLE_IDS = [1, 2, 3, 4, 5, 6];
 const EXAMPLE_BUDGETS: BudgetMap = {
   income: 4200,

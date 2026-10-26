@@ -2,7 +2,7 @@
 
 **Live:** [https://joshkaki00.github.io/finance-dashboard/](https://joshkaki00.github.io/finance-dashboard/)
 
-A new browser opens with sample finances for Alex Rivera. Anything you add, edit, or delete stays in that browser only. The site is a static GitHub Pages deploy, so there is no server and nothing sleeps on the first load.
+A new browser opens with sample finances for a demo user. Anything you add, edit, or delete stays in that browser only. The site is a static GitHub Pages deploy, so there is no server and nothing sleeps on the first load.
 
 A responsive web application for managing personal finances, built with React, TypeScript, Redux, and Tailwind CSS. It includes WCAG 2.2 accessibility support and layouts for mobile, tablet, and desktop.
 
