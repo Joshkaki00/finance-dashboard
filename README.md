@@ -32,7 +32,7 @@ A modern, responsive web application for managing personal finances, built with 
 
 ## 🚀 Live Demo
 
-Visit the live application: **[https://yourusername.github.io/finance-dashboard/](https://yourusername.github.io/finance-dashboard/)**
+Visit the live application: **[https://joshkaki00.github.io/finance-dashboard/](https://joshkaki00.github.io/finance-dashboard/)**
 
 ## 📦 Installation & Setup
 
