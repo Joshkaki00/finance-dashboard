@@ -84,17 +84,16 @@ Your deployed finance dashboard includes:
 - ✅ **WCAG 2.2 Level AA** accessibility compliance
 - ✅ **Interactive Charts** with Recharts
 - ✅ **Redux State Management** with persistence
-- ✅ **Financial API Integration** (requires API key)
+- ✅ **Personalized financial tips** from the data saved in this browser
 - ✅ **Modern UI** with Tailwind CSS
 - ✅ **Performance Optimized** builds with code splitting
 
 ## 🎯 Next Steps
 
-1. **Add API Key**: Update `src/store/financialTipsSlice.js` with your API Ninjas key
-2. **Customize Branding**: Update colors, logo, and app name
-3. **Add Analytics**: Consider adding Google Analytics or similar
-4. **Custom Domain**: Set up a custom domain in GitHub Pages settings
-5. **SEO Optimization**: Add meta tags and Open Graph data
+1. **Customize Branding**: Update colors, logo, and app name
+2. **Add Analytics**: Consider adding Google Analytics or similar
+3. **Custom Domain**: Set up a custom domain in GitHub Pages settings
+4. **SEO Optimization**: Add meta tags and Open Graph data
 
 ## 📊 Performance Metrics
 

@@ -1,103 +1,44 @@
-import { useEffect } from 'react';
-import { fetchFinancialTips } from '../store/financialTipsSlice';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { generatePersonalizedTips } from '../store/financialTipsSlice';
+import { useAppSelector } from '../store/hooks';
+import type { FinancialTipKind } from '../types';
+
+const tipTone: Record<FinancialTipKind, string> = {
+  positive: 'border-green-500 bg-green-50',
+  warning: 'border-red-500 bg-red-50',
+  caution: 'border-amber-500 bg-amber-50',
+  info: 'border-blue-500 bg-white',
+};
 
 const FinancialTips = () => {
-  const dispatch = useAppDispatch();
-  const { tips, status, error } = useAppSelector((state) => state.financialTips);
+  const transactions = useAppSelector((state) => state.transactions.transactions);
+  const budget = useAppSelector((state) => state.budget);
+  const tips = generatePersonalizedTips(transactions, budget);
 
-  const apiKey = import.meta.env.VITE_API_NINJAS_KEY;
-
-  useEffect(() => {
-    if (apiKey && status === 'idle') {
-      void dispatch(fetchFinancialTips());
-    }
-  }, [apiKey, status, dispatch]);
-
-  if (!apiKey) {
-    return (
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
-        <p className="text-sm sm:text-base text-gray-700">
-          Pay yourself first, then spend what is left.
-        </p>
-      </div>
-    );
-  }
-
-  // Loading state
-  if (status === 'loading') {
-    return (
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
-        <div className="flex justify-center items-center py-6 sm:py-8">
-          <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-500"></div>
-          <span className="ml-3 sm:ml-4 text-sm sm:text-base text-gray-600">Loading financial tips...</span>
-        </div>
-      </div>
-    );
-  }
-
-  // Error state
-  if (status === 'failed') {
-    return (
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
-        <div className="bg-red-50 border-l-4 border-red-400 p-3 sm:p-4 mb-4 rounded-r-md">
-          <p className="text-red-700 text-sm">
-            <span className="font-bold">Error:</span> {error || 'Failed to load financial tips.'}
-          </p>
-          <button 
-            onClick={() => { void dispatch(fetchFinancialTips()); }}
-            className="mt-2 bg-red-500 hover:bg-red-600 text-white font-medium py-1.5 px-3 rounded text-xs sm:text-sm transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Empty state
-  if (status === 'succeeded' && (!tips || tips.length === 0)) {
-    return (
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
-        <div className="text-center py-6 sm:py-8 text-gray-500">
-          <p className="text-sm sm:text-base">No financial tips available at the moment.</p>
-          <button 
-            onClick={() => { void dispatch(fetchFinancialTips()); }}
-            className="mt-3 sm:mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-1.5 px-3 rounded text-xs sm:text-sm transition-colors"
-          >
-            Refresh
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Success state with data
   return (
-    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Financial Wisdom</h2>
-      
-      <div className="space-y-3 sm:space-y-4">
+    <section className="bg-white p-4 sm:p-6 rounded-lg shadow-md" aria-labelledby="financial-insights-heading">
+      <h2 id="financial-insights-heading" className="text-lg sm:text-xl font-semibold text-gray-800">
+        Your Financial Insights
+      </h2>
+      <p className="text-sm text-gray-500 mt-1 mb-4">
+        Based on your spending patterns and budgets
+      </p>
+
+      <ul className="space-y-3">
         {tips.map((tip) => (
-          <div key={`${tip.author}-${tip.quote.slice(0, 20)}`} className="pb-3 sm:pb-4 border-b border-gray-200 last:border-b-0 last:pb-0">
-            <p className="text-gray-700 italic text-sm sm:text-base leading-relaxed">"{tip.quote}"</p>
-            <p className="text-gray-600 text-xs sm:text-sm mt-2 font-medium">— {tip.author}</p>
-          </div>
+          <li
+            key={`${tip.title}-${tip.icon}`}
+            className={`flex gap-3 rounded-lg border-l-4 p-4 ${tipTone[tip.type]}`}
+          >
+            <span aria-hidden="true" className="text-2xl leading-none">{tip.icon}</span>
+            <div>
+              <h3 className="font-semibold text-gray-900">{tip.title}</h3>
+              <p className="text-sm text-gray-700 mt-1 leading-relaxed">{tip.description}</p>
+            </div>
+          </li>
         ))}
-      </div>
-      
-      <button 
-        onClick={() => { void dispatch(fetchFinancialTips()); }}
-        className="mt-3 sm:mt-4 w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded text-sm transition-colors"
-      >
-        Get New Tips
-      </button>
-    </div>
+      </ul>
+    </section>
   );
 };
 
-export default FinancialTips; 
+export default FinancialTips;

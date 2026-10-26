@@ -2,7 +2,6 @@ import { configureStore, type Middleware, type UnknownAction } from '@reduxjs/to
 import transactionsReducer from './transactionsSlice';
 import budgetReducer from './budgetSlice';
 import categoriesReducer from './categoriesSlice';
-import financialTipsReducer from './financialTipsSlice';
 import accessibilityReducer from './accessibilitySlice';
 import { saveChange } from '../db/client';
 import type { Transaction, TransactionsState } from '../types';
@@ -71,7 +70,6 @@ export const store = configureStore({
     transactions: transactionsReducer,
     budget: budgetReducer,
     categories: categoriesReducer,
-    financialTips: financialTipsReducer,
     accessibility: accessibilityReducer,
   },
   middleware: (getDefaultMiddleware) =>

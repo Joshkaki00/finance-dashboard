@@ -27,7 +27,6 @@
 - **Expected After:** ~1.2s (33% improvement)
 - **Optimizations:**
   - Critical CSS inlined in HTML
-  - Preconnect to API endpoints
   - Loading spinner for immediate feedback
   - Lazy loading of heavy components
 
@@ -35,7 +34,6 @@
 - **Before:** 2.6s
 - **Expected After:** ~1.8s (31% improvement)
 - **Optimizations:**
-  - Preconnect to `api.api-ninjas.com` (-300ms)
   - Lazy loading of Dashboard component
   - Optimized bundle splitting
   - Resource preloading
@@ -72,10 +70,6 @@ manualChunks: (id) => {
 
 #### **3. Resource Optimization**
 ```html
-<!-- Preconnect to external APIs -->
-<link rel="preconnect" href="https://api.api-ninjas.com" crossorigin>
-<link rel="dns-prefetch" href="https://api.api-ninjas.com">
-
 <!-- Module preloading -->
 <link rel="modulepreload" href="/src/main.tsx">
 ```

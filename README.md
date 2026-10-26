@@ -59,17 +59,12 @@ cd finance-dashboard
 npm install
 ```
 
-3. **Set up the quotes API key (optional):**
-   - Get a free API key from [API Ninjas](https://api-ninjas.com/)
-   - Copy `.env.example` to `.env.local` and set `VITE_API_NINJAS_KEY`
-   - Leave it unset to keep the built-in tip. The key is not stored in the repo.
-
-4. **Start development server:**
+3. **Start development server:**
 ```bash
 npm run dev
 ```
 
-5. **Open your browser:**
+4. **Open your browser:**
    Navigate to `http://localhost:5173/finance-dashboard/`
 
 ### Build for Production
@@ -142,9 +137,9 @@ This will build the project and push to the `gh-pages` branch.
 - Responsive grid layout for easy management
 
 ### Financial Tips
-- Integration with API Ninjas for financial wisdom
-- Proper loading, error, and empty state handling
-- Refresh functionality for new tips
+- Advice generated from your income, spending, and budgets
+- Savings rate, over-budget warnings, and the category costing you the most
+- Updates as soon as you add a transaction or change a budget
 
 ## ♿ Accessibility Features
 
@@ -227,7 +222,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- [API Ninjas](https://api-ninjas.com/) for financial quotes API
 - [Recharts](https://recharts.org/) for beautiful, responsive charts
 - [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
 - [Redux Toolkit](https://redux-toolkit.js.org/) for efficient state management
@@ -245,24 +239,19 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Environment Variables
 
-For production deployment, set up environment variables:
-
-```bash
-# .env.local (not committed to git)
-VITE_API_NINJAS_KEY=your_api_key_here
-```
+No API key is required. Financial tips are calculated in the browser from your own transactions and budgets.
 
 ### Customization
 
 - **Colors**: Update Tailwind config in `tailwind.config.js`
 - **Categories**: Modify `src/store/categoriesSlice.ts`
-- **API Integration**: Update `src/store/financialTipsSlice.ts`
+- **Tips**: Update the advice rules in `src/store/financialTipsSlice.ts`
 - **Responsive Breakpoints**: Adjust in component CSS classes
 
 ---
 
 **Built with ❤️ for accessible, responsive personal finance management**
-- Implementing the API integration with `createAsyncThunk`
+- Personalized savings tips generated from the user's own transactions and budgets
 - Designing UI components for different states (loading, error, empty)
 - Debugging form validation issues
 - Creating responsive Tailwind CSS layouts

@@ -37,9 +37,13 @@ export interface AccessibilityPreferences {
   keyboardHelper: boolean
 }
 
+export type FinancialTipKind = 'positive' | 'warning' | 'caution' | 'info'
+
 export interface FinancialTip {
-  quote: string
-  author: string
+  icon: string
+  title: string
+  description: string
+  type: FinancialTipKind
 }
 
 export interface TransactionsState {
