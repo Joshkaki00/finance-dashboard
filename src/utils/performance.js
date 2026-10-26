@@ -2,7 +2,7 @@
 
 export const measurePerformance = () => {
   // Only run in production
-  if (process.env.NODE_ENV !== 'production') return;
+  if (!import.meta.env.PROD) return;
 
   // Measure Core Web Vitals
   const observer = new PerformanceObserver((list) => {
@@ -22,7 +22,7 @@ export const measurePerformance = () => {
   // Observe Core Web Vitals
   try {
     observer.observe({ entryTypes: ['measure', 'navigation', 'paint'] });
-  } catch (e) {
+  } catch {
     // Fallback for older browsers
     console.warn('Performance Observer not supported');
   }
@@ -36,7 +36,7 @@ export const measureComponentRender = (componentName) => {
     const endTime = performance.now();
     const renderTime = endTime - startTime;
     
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.DEV) {
       console.log(`${componentName} render time: ${renderTime.toFixed(2)}ms`);
     }
   };
@@ -64,7 +64,7 @@ export const preloadCriticalResources = () => {
 export const optimizeImages = () => {
   // Add intersection observer for lazy loading images
   if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
+    const imageObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const img = entry.target;
@@ -84,7 +84,7 @@ export const optimizeImages = () => {
 
 // Service Worker registration for caching
 export const registerServiceWorker = async () => {
-  if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+  if ('serviceWorker' in navigator && import.meta.env.PROD) {
     try {
       const registration = await navigator.serviceWorker.register('/sw.js');
       console.log('Service Worker registered:', registration);
